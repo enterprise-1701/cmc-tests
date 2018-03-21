@@ -1,0 +1,46 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Automation - Suite">
+<parameter name="browser" value="chrome"></parameter>
+   <parameter name="seleniumgridurl" value="local"></parameter>
+   <parameter name="browser" value="chrome"></parameter>
+    <parameter name="executionenv" value="local"></parameter>
+     <parameter name="version" value=""></parameter>
+     <parameter name="platform" value=""></parameter>
+     <parameter name="chromeDownloadDirPath" value="c:\temp\"></parameter>
+     <parameter name="projectID" value="35"></parameter>
+     <parameter name="suiteID" value="549"></parameter>
+	<test name="ChromeTest">
+		<parameter name="browser" value="chrome.exe" />
+		<classes>
+			<class name="com.cubic.cmcjava.tests.BalanceHistoryTest"/>
+			<class name="com.cubic.cmcjava.tests.TestScript_Driver"/>
+			<class name="com.cubic.cmcjava.tests.CreateCustomerAPITest" />
+			<class name="com.cubic.cmcjava.tests.CreateCustomerDBTest" />
+			<class name="com.cubic.cmcjava.tests.CreateCustomerTest" />
+			<class name="com.cubic.cmcjava.tests.CreateFundingTest" />
+			<class name="com.cubic.cmcjava.tests.CreateOrderDBTest" />
+			<class name="com.cubic.cmcjava.tests.CreateOrderTest" />
+			<class name="com.cubic.cmcjava.tests.CreateUnregistredCustomerTest" />
+			<class name="com.cubic.cmcjava.tests.DeleteAddressTest" />
+			<class name="com.cubic.cmcjava.tests.DeleteFundingTest" />
+			<class name="com.cubic.cmcjava.tests.LinkAccountAPITest" />
+			<class name="com.cubic.cmcjava.tests.LinkAccountDBTest" />
+			<class name="com.cubic.cmcjava.tests.LinkAccountTest" />
+			<class name="com.cubic.cmcjava.tests.NotificationPrefTest" />
+			<class name="com.cubic.cmcjava.tests.ResetPasswordTest" />
+			<class name="com.cubic.cmcjava.tests.SearchTest" />
+			<class name="com.cubic.cmcjava.tests.SearchTest2" />
+			<class name="com.cubic.cmcjava.tests.TokenSearchAPITest" />
+			<class name="com.cubic.cmcjava.tests.TokenSearchTest" />
+			<class name="com.cubic.cmcjava.tests.UpdateAddressTest" />
+			<class name="com.cubic.cmcjava.tests.UpdateContactTest" />
+			<class name="com.cubic.cmcjava.tests.UpdateFundingTest" />
+			<class name="com.cubic.cmcjava.tests.EmailTest" />
+			<class name="com.cubic.cmcjava.tests.RuleSetTrialTest" />  
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+	</listeners>
+</suite>
