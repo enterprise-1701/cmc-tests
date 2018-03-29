@@ -1,4 +1,4 @@
-package com.cubic.cmctests.tests;
+package com.cubic.cmctests.testslegacy;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;

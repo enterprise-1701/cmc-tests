@@ -1,4 +1,4 @@
-package com.cubic.cmctests.tests;
+package com.cubic.cmctests.testslegacy;
 
 import java.awt.AWTException;
 import java.util.concurrent.TimeUnit;

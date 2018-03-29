@@ -1,4 +1,4 @@
-package com.cubic.cmctests.tests;
+package com.cubic.cmctests.testslegacy;
 
 import java.net.URL;
 import org.openqa.selenium.WebDriver;

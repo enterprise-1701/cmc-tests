@@ -1,10 +1,9 @@
-package com.cubic.cmctests.tests;
+package com.cubic.cmctests.testslegacy;
 
 import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.os.WindowsUtils;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.Reporter;

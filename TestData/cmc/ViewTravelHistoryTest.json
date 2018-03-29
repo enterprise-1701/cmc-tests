@@ -1,0 +1,19 @@
+{
+  "viewTravelHistory_DateRangeDefaultTEST": [
+    {
+      "RunMode": "Y",
+      "TestCase_Description": "12483:ViewTravelHistory_DefaultDateRange",
+      "SEARCH_TYPE": "Customer Search",
+      "LAST_NAME": "Creedon"
+    }
+  ],
+  "viewTravelHistory_RowCountDefaultTEST": [
+    {
+      "RunMode": "Y",
+      "TestCase_Description": "12486:viewTravelHistory_RowCountDefault",
+      "SEARCH_TYPE": "Customer Search",
+      "LAST_NAME": "Creedon",
+      "EXPECTED": "10"
+    }
+  ]
+}

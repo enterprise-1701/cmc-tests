@@ -1,4 +1,4 @@
-package com.cubic.cmctests.tests;
+package com.cubic.cmctests.testslegacy;
 
 import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
@@ -12,8 +12,8 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.cubic.cmcjava.pageobjects.*;
-import com.cubic.cmctests.tests.CoreTest;
 import com.cubic.cmcjava.utils.*;
+import com.cubic.cmctests.testslegacy.CoreTest;
 
 //#################################################################################
 //

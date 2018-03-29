@@ -1,4 +1,4 @@
-package com.cubic.cmctests.tests;
+package com.cubic.cmctests.testslegacy;
 
 import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
