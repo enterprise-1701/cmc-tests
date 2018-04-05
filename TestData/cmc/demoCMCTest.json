@@ -1,23 +1,23 @@
 {
-  "C11862_CSRLoginTest": [
+  "11862_CSRLoginTest": [
     {
       "RunMode": "Y",
-      "TestCase_Description": "C11862:CSRLoginTest"
+      "TestCase_Description": "11862:CSRLoginTest"
     }
   ],
-  "C11627_CSRResetCustomerPasswordTest": [
+  "11627_CSRResetCustomerPasswordTest": [
     {
       "RunMode": "Y",
-      "TestCase_Description": "C11627:CSRResetCustomerPasswordTest",
+      "TestCase_Description": "11627:CSRResetCustomerPasswordTest",
       "SUBJECT": "Password Reset Verification",
       "SEARCH_TYPE": "Customer Search",
       "EMAIL": "Adam.Hudson@cubic.com"
     }
   ],
-  "C11841_ViewActivityHistoryTest": [
+  "11841_ViewActivityHistoryTest": [
     {
       "RunMode": "Y",
-      "TestCase_Description": "C11841:ViewActivityHistoryTest",
+      "TestCase_Description": "11841:ViewActivityHistoryTest",
       "SEARCH_TYPE": "Customer Search",
       "EMAIL": "Adam.Hudson@cubic.com"
     }
