@@ -1,8 +1,8 @@
 {
-  "C11862_CSRLoginTest": [
+  "11862_CSRLoginTest": [
     {
       "RunMode": "Y",
-      "TestCase_Description": "C11862:CSRLoginTest"
+      "TestCase_Description": "11862:CSRLoginTest"
     }
   ]
 }
