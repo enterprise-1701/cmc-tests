@@ -15,8 +15,8 @@
 	<test name="CMCTests - Chrome">
 		<parameter name="browser" value="saucelabs"/>
 		<classes>
-			<class name="com.cubic.cmctests.tests.TestScript_Driver"/>
-			<class name="com.cubic.cmctests.tests.CreateCustomerAPITest"/>
+		<class name="com.cubic.cmctests.testslegacy.TestScript_Driver" />
+		<class name="com.cubic.cmctests.testslegacy.CreateCustomerAPITest"/>
 		</classes>
 	</test>
 	<listeners>
