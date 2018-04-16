@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<test name="Test">
+		<parameter name="browser" value="chrome"/>
+		<parameter name="executionenv" value="local"/>
+		<parameter name="version" value="latest"/>
+		<parameter name="platform" value="windows 7"/>
+		<parameter name="chromeDownloadDirPath" value="c:\temp\"/>
+
+		<classes>
+            <class name="com.cubic.cmcjava.tests.script.CSRLoginTest"/>
+			<class name="com.cubic.cmcjava.tests.script.CSRResetCustomerPasswordTest"/>
+			<class name="com.cubic.cmcjava.tests.script.ViewActivityHistoryTest"/>
+		</classes>
+	</test>
+</suite>

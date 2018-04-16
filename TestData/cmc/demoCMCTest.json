@@ -1,0 +1,42 @@
+{
+  "11862_CSRLoginTest": [
+    {
+      "RunMode": "Y",
+      "TestCase_Description": "11862:CSRLoginTest"
+    }
+  ],
+  "11627_CSRResetCustomerPasswordTest": [
+    {
+      "RunMode": "Y",
+      "TestCase_Description": "11627:CSRResetCustomerPasswordTest",
+      "SUBJECT": "Password Reset Verification",
+      "SEARCH_TYPE": "Customer Search",
+      "EMAIL": "Adam.Hudson@cubic.com"
+    }
+  ],
+  "11841_ViewActivityHistoryTest": [
+    {
+      "RunMode": "Y",
+      "TestCase_Description": "11841:ViewActivityHistoryTest",
+      "SEARCH_TYPE": "Customer Search",
+      "EMAIL": "Adam.Hudson@cubic.com"
+    }
+  ],
+  "viewTravelHistory_DateRangeDefaultTEST": [
+    {
+      "RunMode": "Y",
+      "TestCase_Description": "12483:ViewTravelHistory_DefaultDateRange",
+      "SEARCH_TYPE": "Customer Search",
+      "LAST_NAME": "Creedon"
+    }
+  ],
+  "viewTravelHistory_RowCountDefaultTEST": [
+    {
+      "RunMode": "Y",
+      "TestCase_Description": "12486:viewTravelHistory_RowCountDefault",
+      "SEARCH_TYPE": "Customer Search",
+      "LAST_NAME": "Creedon",
+      "EXPECTED": "10"
+    }
+  ]
+}

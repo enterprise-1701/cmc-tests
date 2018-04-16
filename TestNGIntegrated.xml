@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Automation - Suite">
+<parameter name="browser" value="chrome"></parameter>
+   <parameter name="seleniumgridurl" value="local"></parameter>
+   <parameter name="browser" value="chrome"></parameter>
+    <parameter name="executionenv" value="local"></parameter>
+     <parameter name="version" value=""></parameter>
+     <parameter name="platform" value=""></parameter>
+     <parameter name="chromeDownloadDirPath" value="c:\temp\"></parameter>
+     <parameter name="projectID" value="35"></parameter>
+     <parameter name="suiteID" value="549"></parameter>
+	<test name="ChromeTest">
+		<parameter name="browser" value="chrome"/>
+		<classes>
+			<class name="com.cubic.cmctests.testslegacy.CreateCustomerAPITest"/>
+			<class name="com.cubic.cmctests.tests.CSRLoginTest"/> 
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+	</listeners>
+</suite>

@@ -1,0 +1,10 @@
+{
+  "11841_ViewActivityHistoryTest": [
+    {
+      "RunMode": "Y",
+      "TestCase_Description": "11841:ViewActivityHistoryTest",
+      "SEARCH_TYPE": "Customer Search",
+      "EMAIL": "Adam.Hudson@cubic.com"
+    }
+  ]
+}
