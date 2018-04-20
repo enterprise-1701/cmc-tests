@@ -21,7 +21,6 @@ import com.cubic.cmcjava.utils.*;
 
 public class CreateCustomerAPITest {
 
-
 	private static String phoneNumber;
 	private static String email;
 	private static CustomerData cData;
@@ -60,7 +59,7 @@ public class CreateCustomerAPITest {
 		coreTest.signIn(driver);
 		SearchPage sPage = getSearchPage();
 		sPage.selectSearchTypeCustomer(driver);
-		sPage.clickCustomerType(driver, "Individual");
+		sPage.clickCustomerType(driver, Global.CUSTOMERTYPE);
 		sPage.enterEmail(driver, email);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 175)", "");
 		sPage.clickSearch(driver);
