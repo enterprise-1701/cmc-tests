@@ -68,7 +68,7 @@ public class BalanceHistoryTest extends RESTEngine {
             restActions.successReport("test", "test");
             Log.info("29984");
             // create travel balance via soap call
-            /*
+
             SOAPClientSAAJ sClient = new SOAPClientSAAJ();
             CreditCardNumberGenerator ccGenerator = new CreditCardNumberGenerator();
             String validCCNumber = ccGenerator.generate("4", 16);
@@ -91,10 +91,12 @@ public class BalanceHistoryTest extends RESTEngine {
 
             tPage.clickViewDetails(driver);
             BalanceHistoryPage bdPage = new BalanceHistoryPage(driver);
-            Assert.assertEquals(bdPage.getTokenType(driver), TOKEN_TYPE);
-            Assert.assertEquals(bdPage.getStatus(driver), STATUS);
-            Assert.assertEquals(bdPage.getDevice(driver), DEVICE);
-            */
+
+            Assert.assertTrue(
+                    restActions.assertTrue(bdPage.getTokenType(driver).equals(TOKEN_TYPE), "assertion failed"));
+            Assert.assertTrue(restActions.assertTrue(bdPage.getStatus(driver).equals(STATUS), "assertion failed"));
+            Assert.assertTrue(restActions.assertTrue(bdPage.getDevice(driver).equals(DEVICE), "assertion failed"));
+
             driver.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,13 +117,16 @@ public class BalanceHistoryTest extends RESTEngine {
             restActions = setupAutomationTest(context, testCaseName);
             restActions.successReport("test", "test");
             Log.info("29985");
-            /*
+
             registerCustomerAndCreateBalance(driver);
             BalanceHistoryPage bdPage = new BalanceHistoryPage(driver);
-            Assert.assertEquals(bdPage.getPurse(driver), PURSE_RC);
-            Assert.assertEquals(bdPage.getEntryType(driver), ENTRY_TYPE2);
-            Assert.assertEquals(bdPage.getTransactionAmount(driver), TRANSACTION_AMOUNT2);
-            */
+
+            Assert.assertTrue(restActions.assertTrue(bdPage.getPurse(driver).equals(PURSE_RC), "assertion failed"));
+            Assert.assertTrue(
+                    restActions.assertTrue(bdPage.getEntryType(driver).equals(ENTRY_TYPE2), "assertion failed"));
+            Assert.assertTrue(restActions.assertTrue(bdPage.getTransactionAmount(driver).equals(TRANSACTION_AMOUNT2),
+                    "assertion failed"));
+
             driver.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -134,7 +139,7 @@ public class BalanceHistoryTest extends RESTEngine {
     }
 
     // view registered customer balance history details
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void viewBalanceHistoryDetailsRegisteredDynamic(ITestContext context) throws Exception {
 
         String testCaseName = "29986: viewBalanceHistoryDetailsRegisteredDynamic";
@@ -142,14 +147,19 @@ public class BalanceHistoryTest extends RESTEngine {
         try {
 
             restActions = setupAutomationTest(context, testCaseName);
+            restActions.successReport("test", "test");
             Log.info("29986");
+
             registerCustomerAndCreateBalance(driver);
             BalanceHistoryPage bhPage = new BalanceHistoryPage(driver);
             Utils.waitTime(5000);
             bhPage.clickRow(driver);
             BalanceHistoryDetailPage bdPage = new BalanceHistoryDetailPage(driver);
-            Assert.assertEquals(bdPage.getPurse(driver), PURSE_RC);
-            Assert.assertEquals(bdPage.getEntryType(driver), ENTRY_TYPE2);
+
+            Assert.assertTrue(restActions.assertTrue(bdPage.getPurse(driver).equals(PURSE_RC), "assertion failed"));
+            Assert.assertTrue(
+                    restActions.assertTrue(bdPage.getEntryType(driver).equals(ENTRY_TYPE2), "assertion failed"));
+
             driver.close();
 
         } catch (Exception e) {
@@ -162,71 +172,105 @@ public class BalanceHistoryTest extends RESTEngine {
     }
 
     // CCD-851 - balance history filter
-    @Test(enabled = false)
-    public void viewBalanceHistoryFilterTest() throws Exception {
+    @Test(enabled = true)
+    public void viewBalanceHistoryFilterTest(ITestContext context) throws Exception {
 
-        Log.info("185941");
-        registerCustomerAndCreateBalance(driver);
-        BalanceHistoryPage bdPage = new BalanceHistoryPage(driver);
-        Utils.waitTime(5000);
-        bdPage.selectTransactionType(driver, "Charge");
-        bdPage.clickBalanceHistoryFilter(driver);
-        Utils.waitTime(5000);
-        Assert.assertEquals(bdPage.getNoRecordFound(driver), NO_RECORD_FOUND);
-        bdPage.selectTransactionType(driver, "PurseLoad");
-        bdPage.clickBalanceHistoryFilter(driver);
-        Utils.waitTime(5000);
+        String testCaseName = "185941: viewBalanceHistoryFilterTest";
 
-        Assert.assertEquals(bdPage.getPurse(driver), PURSE_RC);
-        Assert.assertEquals(bdPage.getEntryType(driver), ENTRY_TYPE2);
-        driver.close();
+        try {
+
+            restActions = setupAutomationTest(context, testCaseName);
+            restActions.successReport("test", "test");
+            Log.info("185941");
+
+            registerCustomerAndCreateBalance(driver);
+            BalanceHistoryPage bdPage = new BalanceHistoryPage(driver);
+            Utils.waitTime(5000);
+            bdPage.selectTransactionType(driver, "Charge");
+            bdPage.clickBalanceHistoryFilter(driver);
+            Utils.waitTime(5000);
+
+            bdPage.selectTransactionType(driver, "PurseLoad");
+
+            bdPage.clickBalanceHistoryFilter(driver);
+            Utils.waitTime(5000);
+
+            Assert.assertTrue(restActions.assertTrue(bdPage.getNoRecordFound(driver).equals(NO_RECORD_FOUND),
+                    "assertion failed"));
+            Assert.assertTrue(restActions.assertTrue(bdPage.getPurse(driver).equals(PURSE_RC), "assertion failed"));
+            Assert.assertTrue(
+                    restActions.assertTrue(bdPage.getEntryType(driver).equals(ENTRY_TYPE2), "assertion failed"));
+
+            driver.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            restActions.failureReport("Exception caught in catch block", "Exception is: " + e);
+            throw new RuntimeException(e);
+        } finally {
+            teardownAutomationTest(context, testCaseName);
+        }
 
     }
 
-    // failing balance history not getting updated
-    @Test(enabled = false)
-    public void viewUpdatedBalanceHistoryTest() throws Exception {
+    //
+    @Test(enabled = true)
+    public void viewUpdatedBalanceHistoryTest(ITestContext context) throws Exception {
 
-        Log.info("185942");
-        Boolean balanceUpdated = false;
+        String testCaseName = "185942: viewUpdatedBalanceHistoryTest";
 
-        // create a tap, create oneaccount and link token to oneaccount
-        loadValueAndRegisterCustomer(driver);
-        NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
+        try {
+            restActions = setupAutomationTest(context, testCaseName);
+            restActions.successReport("test", "test");
+            Log.info("185942");
+            Boolean balanceUpdated = false;
 
-        // create another tap with the original CC
-        SOAPClientSAAJ sClient = new SOAPClientSAAJ();
-        Log.info("cc number being used the second time is " + validCCNumber);
-        sClient.postTapSOAPCall(validCCNumber);
-        Log.info("wait 1 minute for trip to get generated");
-        Utils.waitTime(120000);
-        String initialBalance = (nPage3.getAccountBalances(driver).substring(1));
-        Log.info("initial balance is: " + Double.valueOf(initialBalance));
+            // create a tap, create oneaccount and link token to oneaccount
+            loadValueAndRegisterCustomer(driver);
+            NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
 
-        // Go back and do another search on the customer to see the updated
-        // account balance
-        nPage3.clickHome(driver);
-        SearchPage sPage = new SearchPage(driver);
-        sPage.selectSearchTypeCustomer(driver);
-        sPage.clickCustomerType(driver, "Traveler");
-        sPage.enterEmail(driver, email);
-        sPage.clickSearch(driver);
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
-        Utils.waitTime(5000);
-        sPage.clickRecord(driver);
-        sPage.clickSecurityBox(driver);
-        sPage.clickContiune(driver);
+            // create another tap with the original CC
+            SOAPClientSAAJ sClient = new SOAPClientSAAJ();
+            Log.info("cc number being used the second time is " + validCCNumber);
+            sClient.postTapSOAPCall(validCCNumber);
+            Log.info("wait 1 minute for trip to get generated");
+            Utils.waitTime(120000);
+            String initialBalance = (nPage3.getAccountBalances(driver).substring(1));
+            Log.info("initial balance is: " + Double.valueOf(initialBalance));
 
-        Log.info("updated balance is: " + Double.valueOf(nPage3.getAccountBalances(driver).substring(1)));
+            // Go back and do another search on the customer to see the updated
+            // account balance
 
-        // Assertion based on updated account balance less than initial account
-        // balance
-        if (Double.valueOf(nPage3.getAccountBalances(driver).substring(1)) < Double.valueOf(initialBalance)) {
-            balanceUpdated = true;
+            nPage3.clickHome(driver);
+            SearchPage sPage = new SearchPage(driver);
+            sPage.selectSearchTypeCustomer(driver);
+            sPage.clickCustomerType(driver, "Traveler");
+            sPage.enterEmail(driver, email);
+            sPage.clickSearch(driver);
+            ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
+            Utils.waitTime(5000);
+            sPage.clickRecord(driver);
+            sPage.clickSecurityBox(driver);
+            sPage.clickContiune(driver);
+
+            Log.info("updated balance is: " + Double.valueOf(nPage3.getAccountBalances(driver).substring(1)));
+
+            // Assertion based on updated account balance less than initial
+            // account balance
+
+            if (Double.valueOf(nPage3.getAccountBalances(driver).substring(1)) < Double.valueOf(initialBalance)) {
+                balanceUpdated = true;
+            }
+
+            Assert.assertTrue(restActions.assertTrue((balanceUpdated), "assertion failed"));
+
+            driver.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            restActions.failureReport("Exception caught in catch block", "Exception is: " + e);
+            throw new RuntimeException(e);
+        } finally {
+            teardownAutomationTest(context, testCaseName);
         }
-
-        Assert.assertTrue(balanceUpdated);
-        driver.close();
 
     }
 

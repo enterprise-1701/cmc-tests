@@ -59,9 +59,10 @@ public class CreateCustomerAPITest {
 		coreTest.signIn(driver);
 		SearchPage sPage = getSearchPage();
 		sPage.selectSearchTypeCustomer(driver);
-		sPage.clickCustomerType(driver, Global.CUSTOMERTYPE);
+		sPage.clickCustomerType(driver, "Traveler");
 		sPage.enterEmail(driver, email);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 175)", "");
+		Utils.waitTime(30000);
 		sPage.clickSearch(driver);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
 		Utils.waitTime(5000);

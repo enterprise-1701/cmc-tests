@@ -14,7 +14,7 @@ import com.cubic.cmcjava.restapi.ApiCustomerGet;
 import com.cubic.cmcjava.utils.*;
 
 //#################################################################################
-// Quality Center Test IDs: 71940
+// 
 //#################################################################################
 
 public class GetCustomerAPITest {
