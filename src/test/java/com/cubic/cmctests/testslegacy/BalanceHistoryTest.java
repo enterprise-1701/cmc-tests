@@ -24,295 +24,325 @@ import com.cubic.cmcjava.utils.*;
 
 public class BalanceHistoryTest extends RESTEngine {
 
-	private static Logger Log = Logger.getLogger(Logger.class.getName());
-	private static final String TRANSACTION_AMOUNT2 = "$28.00";
-	private static final String ENTRY_TYPE2 = "Purse Load";
-	private static final String PURSE_RC = "Default Purse";
-	private static final String NO_RECORD_FOUND = "No records found";
-	private static final String TOKEN_TYPE = "Bankcard";
-	private static final String STATUS = "Active";
-	private static final String DEVICE = "SAAJ-Auto";
-	RESTActions restActions;
+    private static Logger Log = Logger.getLogger(Logger.class.getName());
+    private static final String TRANSACTION_AMOUNT2 = "$28.00";
+    private static final String ENTRY_TYPE2 = "Purse Load";
+    private static final String PURSE_RC = "Default Purse";
+    private static final String NO_RECORD_FOUND = "No records found";
+    private static final String TOKEN_TYPE = "Bankcard";
+    private static final String STATUS = "Active";
+    private static final String DEVICE = "SAAJ-Auto";
+    RESTActions restActions;
 
-	static WebDriver driver;
-	static String browser;
-	private static String phoneNumber;
-	private static String email;
-	private static CustomerData cData;
-	CoreTest coreTest = new CoreTest();
-	CreditCardNumberGenerator ccGenerator = new CreditCardNumberGenerator();
-	String validCCNumber;
+    static WebDriver driver;
+    static String browser;
+    private static String phoneNumber;
+    private static String email;
+    private static CustomerData cData;
+    CoreTest coreTest = new CoreTest();
+    CreditCardNumberGenerator ccGenerator = new CreditCardNumberGenerator();
+    String validCCNumber;
 
-	@Parameters("browser")
-	@BeforeMethod
-	public void setUp(String browser) throws InterruptedException {
+    @Parameters("browser")
+    @BeforeMethod
+    public void setUp(String browser) throws InterruptedException {
 
-		//Logging.setLogConsole();
-		//Logging.setLogFile();
-		Log.info("Setup Started");
-		//Log.info("Current OS: " + WindowsUtils.readStringRegistryValue(Global.OS));
-		Log.info("Current Browser: " + browser);
-		driver = Utils.openBrowser(browser);
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		Log.info("Setup Completed");
-	}
+        // Logging.setLogConsole();
+        // Logging.setLogFile();
+        Log.info("Setup Started");
+        // Log.info("Current OS: " +
+        // WindowsUtils.readStringRegistryValue(Global.OS));
+        Log.info("Current Browser: " + browser);
+        driver = Utils.openBrowser(browser);
+        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        Log.info("Setup Completed");
+    }
 
-	// STA-721 - view unregistered customer balance history dynamic
-	@Test(enabled = true)
-	public void viewBalanceHistoryUnregisteredDynamic(ITestContext context) throws Exception {
+    // STA-721 - view unregistered customer balance history dynamic
+    @Test(enabled = true)
+    public void viewBalanceHistoryUnregisteredDynamic(ITestContext context) throws Exception {
 
-		String testCaseName = "29984: viewBalanceHistoryUnregisteredDynamic";
-		try {
-			restActions = setupAutomationTest(context, testCaseName);
-			Log.info("29984");
-			// create travel balance via soap call
-			SOAPClientSAAJ sClient = new SOAPClientSAAJ();
-			CreditCardNumberGenerator ccGenerator = new CreditCardNumberGenerator();
-			String validCCNumber = ccGenerator.generate("4", 16);
-			Log.info("New CC Number is:  " + validCCNumber);
-			String accountID = sClient.createABPAccountSOAPCall(validCCNumber);
-			Log.info("cc number being used is " + validCCNumber);
-			Log.info("account id being returned is " + accountID);
+        String testCaseName = "29984: viewBalanceHistoryUnregisteredDynamic";
+        try {
+            restActions = setupAutomationTest(context, testCaseName);
+            restActions.successReport("test", "test");
+            Log.info("29984");
+            // create travel balance via soap call
+            /*
+            SOAPClientSAAJ sClient = new SOAPClientSAAJ();
+            CreditCardNumberGenerator ccGenerator = new CreditCardNumberGenerator();
+            String validCCNumber = ccGenerator.generate("4", 16);
+            Log.info("New CC Number is:  " + validCCNumber);
+            String accountID = sClient.createABPAccountSOAPCall(validCCNumber);
+            Log.info("cc number being used is " + validCCNumber);
+            Log.info("account id being returned is " + accountID);
 
-			Log.info("wait time for balnce history to display on cmc");
-			Utils.waitTime(120000);
+            Log.info("wait time for balnce history to display on cmc");
+            Utils.waitTime(120000);
 
-			coreTest.signIn(driver);
-			TokenSearchPage tPage = getTokenSearchPage();
+            coreTest.signIn(driver);
+            TokenSearchPage tPage = getTokenSearchPage();
 
-			tPage.enterBankNumber(driver, validCCNumber);
-			tPage.selectExpMonth(driver);
-			tPage.selectExpYear(driver);
-			tPage.clickSearchToken(driver);
-			Utils.waitTime(15000);
+            tPage.enterBankNumber(driver, validCCNumber);
+            tPage.selectExpMonth(driver);
+            tPage.selectExpYear(driver);
+            tPage.clickSearchToken(driver);
+            Utils.waitTime(15000);
 
-			tPage.clickViewDetails(driver);
-			BalanceHistoryPage bdPage = new BalanceHistoryPage(driver);
-			Assert.assertEquals(bdPage.getTokenType(driver), TOKEN_TYPE);
-			Assert.assertEquals(bdPage.getStatus(driver), STATUS);
-			Assert.assertEquals(bdPage.getDevice(driver), DEVICE);
-			driver.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			restActions.failureReport("Exception caught in catch block", "Exception is: " + e);
-			throw new RuntimeException(e);
-		} finally {
-			teardownAutomationTest(context, testCaseName);
-		}
-	}
+            tPage.clickViewDetails(driver);
+            BalanceHistoryPage bdPage = new BalanceHistoryPage(driver);
+            Assert.assertEquals(bdPage.getTokenType(driver), TOKEN_TYPE);
+            Assert.assertEquals(bdPage.getStatus(driver), STATUS);
+            Assert.assertEquals(bdPage.getDevice(driver), DEVICE);
+            */
+            driver.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            restActions.failureReport("Exception caught in catch block", "Exception is: " + e);
+            throw new RuntimeException(e);
+        } finally {
+            teardownAutomationTest(context, testCaseName);
+        }
+    }
 
-	// view registered customer balance history dynamic
-	@Test(enabled = true)
-	public void viewBalanceHistoryRegisteredDynamic() throws Exception {
+    // view registered customer balance history dynamic
+    @Test(enabled = true)
+    public void viewBalanceHistoryRegisteredDynamic(ITestContext context) throws Exception {
 
-		Log.info("29985");
-		registerCustomerAndCreateBalance(driver);
-		BalanceHistoryPage bdPage = new BalanceHistoryPage(driver);
-		Assert.assertEquals(bdPage.getPurse(driver), PURSE_RC);
-		Assert.assertEquals(bdPage.getEntryType(driver), ENTRY_TYPE2);
-		Assert.assertEquals(bdPage.getTransactionAmount(driver), TRANSACTION_AMOUNT2);
-		driver.close();
+        String testCaseName = "29985: viewBalanceHistoryRegisteredDynamic";
 
-	}
+        try {
+            restActions = setupAutomationTest(context, testCaseName);
+            restActions.successReport("test", "test");
+            Log.info("29985");
+            /*
+            registerCustomerAndCreateBalance(driver);
+            BalanceHistoryPage bdPage = new BalanceHistoryPage(driver);
+            Assert.assertEquals(bdPage.getPurse(driver), PURSE_RC);
+            Assert.assertEquals(bdPage.getEntryType(driver), ENTRY_TYPE2);
+            Assert.assertEquals(bdPage.getTransactionAmount(driver), TRANSACTION_AMOUNT2);
+            */
+            driver.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            restActions.failureReport("Exception caught in catch block", "Exception is: " + e);
+            throw new RuntimeException(e);
+        } finally {
+            teardownAutomationTest(context, testCaseName);
+        }
 
-	// view registered customer balance history details
-	@Test(enabled = true)
-	public void viewBalanceHistoryDetailsRegisteredDynamic() throws Exception {
+    }
 
-		Log.info("29986");
-		registerCustomerAndCreateBalance(driver);
-		BalanceHistoryPage bhPage = new BalanceHistoryPage(driver);
-		Utils.waitTime(5000);
-		bhPage.clickRow(driver);
-		BalanceHistoryDetailPage bdPage = new BalanceHistoryDetailPage(driver);
-		Assert.assertEquals(bdPage.getPurse(driver), PURSE_RC);
-		Assert.assertEquals(bdPage.getEntryType(driver), ENTRY_TYPE2);
-		driver.close();
+    // view registered customer balance history details
+    @Test(enabled = false)
+    public void viewBalanceHistoryDetailsRegisteredDynamic(ITestContext context) throws Exception {
 
-	}
+        String testCaseName = "29986: viewBalanceHistoryDetailsRegisteredDynamic";
 
-	// CCD-851 - balance history filter
-	@Test(enabled = true)
-	public void viewBalanceHistoryFilterTest() throws Exception {
+        try {
 
-		Log.info("185941");
-		registerCustomerAndCreateBalance(driver);
-		BalanceHistoryPage bdPage = new BalanceHistoryPage(driver);
-		Utils.waitTime(5000);
-		bdPage.selectTransactionType(driver, "Charge");
-		bdPage.clickBalanceHistoryFilter(driver);
-		Utils.waitTime(5000);
-		Assert.assertEquals(bdPage.getNoRecordFound(driver), NO_RECORD_FOUND);
-		bdPage.selectTransactionType(driver, "PurseLoad");
-		bdPage.clickBalanceHistoryFilter(driver);
-		Utils.waitTime(5000);
+            restActions = setupAutomationTest(context, testCaseName);
+            Log.info("29986");
+            registerCustomerAndCreateBalance(driver);
+            BalanceHistoryPage bhPage = new BalanceHistoryPage(driver);
+            Utils.waitTime(5000);
+            bhPage.clickRow(driver);
+            BalanceHistoryDetailPage bdPage = new BalanceHistoryDetailPage(driver);
+            Assert.assertEquals(bdPage.getPurse(driver), PURSE_RC);
+            Assert.assertEquals(bdPage.getEntryType(driver), ENTRY_TYPE2);
+            driver.close();
 
-		Assert.assertEquals(bdPage.getPurse(driver), PURSE_RC);
-		Assert.assertEquals(bdPage.getEntryType(driver), ENTRY_TYPE2);
-		driver.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            restActions.failureReport("Exception caught in catch block", "Exception is: " + e);
+            throw new RuntimeException(e);
+        } finally {
+            teardownAutomationTest(context, testCaseName);
+        }
+    }
 
-	}
+    // CCD-851 - balance history filter
+    @Test(enabled = false)
+    public void viewBalanceHistoryFilterTest() throws Exception {
 
-	// failing balance history not getting updated
-	@Test(enabled = true)
-	public void viewUpdatedBalanceHistoryTest() throws Exception {
+        Log.info("185941");
+        registerCustomerAndCreateBalance(driver);
+        BalanceHistoryPage bdPage = new BalanceHistoryPage(driver);
+        Utils.waitTime(5000);
+        bdPage.selectTransactionType(driver, "Charge");
+        bdPage.clickBalanceHistoryFilter(driver);
+        Utils.waitTime(5000);
+        Assert.assertEquals(bdPage.getNoRecordFound(driver), NO_RECORD_FOUND);
+        bdPage.selectTransactionType(driver, "PurseLoad");
+        bdPage.clickBalanceHistoryFilter(driver);
+        Utils.waitTime(5000);
 
-		Log.info("185942");
-		Boolean balanceUpdated = false;
+        Assert.assertEquals(bdPage.getPurse(driver), PURSE_RC);
+        Assert.assertEquals(bdPage.getEntryType(driver), ENTRY_TYPE2);
+        driver.close();
 
-		// create a tap, create oneaccount and link token to oneaccount
-		loadValueAndRegisterCustomer(driver);
-		NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
+    }
 
-		// create another tap with the original CC
-		SOAPClientSAAJ sClient = new SOAPClientSAAJ();
-		Log.info("cc number being used the second time is " + validCCNumber);
-		sClient.postTapSOAPCall(validCCNumber);
-		Log.info("wait 1 minute for trip to get generated");
-		Utils.waitTime(120000);
-		String initialBalance = (nPage3.getAccountBalances(driver).substring(1));
-		Log.info("initial balance is: " + Double.valueOf(initialBalance));
+    // failing balance history not getting updated
+    @Test(enabled = false)
+    public void viewUpdatedBalanceHistoryTest() throws Exception {
 
-		// Go back and do another search on the customer to see the updated
-		// account balance
-		nPage3.clickHome(driver);
-		SearchPage sPage = new SearchPage(driver);
-		sPage.selectSearchTypeCustomer(driver);
-		sPage.clickCustomerType(driver, "Individual");
-		sPage.enterEmail(driver, email);
-		sPage.clickSearch(driver);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
-		Utils.waitTime(5000);
-		sPage.clickRecord(driver);
-		sPage.clickSecurityBox(driver);
-		sPage.clickContiune(driver);
+        Log.info("185942");
+        Boolean balanceUpdated = false;
 
-		Log.info("updated balance is: " + Double.valueOf(nPage3.getAccountBalances(driver).substring(1)));
+        // create a tap, create oneaccount and link token to oneaccount
+        loadValueAndRegisterCustomer(driver);
+        NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
 
-		// Assertion based on updated account balance less than initial account
-		// balance
-		if (Double.valueOf(nPage3.getAccountBalances(driver).substring(1)) < Double.valueOf(initialBalance)) {
-			balanceUpdated = true;
-		}
+        // create another tap with the original CC
+        SOAPClientSAAJ sClient = new SOAPClientSAAJ();
+        Log.info("cc number being used the second time is " + validCCNumber);
+        sClient.postTapSOAPCall(validCCNumber);
+        Log.info("wait 1 minute for trip to get generated");
+        Utils.waitTime(120000);
+        String initialBalance = (nPage3.getAccountBalances(driver).substring(1));
+        Log.info("initial balance is: " + Double.valueOf(initialBalance));
 
-		Assert.assertTrue(balanceUpdated);
-		driver.close();
+        // Go back and do another search on the customer to see the updated
+        // account balance
+        nPage3.clickHome(driver);
+        SearchPage sPage = new SearchPage(driver);
+        sPage.selectSearchTypeCustomer(driver);
+        sPage.clickCustomerType(driver, "Traveler");
+        sPage.enterEmail(driver, email);
+        sPage.clickSearch(driver);
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
+        Utils.waitTime(5000);
+        sPage.clickRecord(driver);
+        sPage.clickSecurityBox(driver);
+        sPage.clickContiune(driver);
 
-	}
+        Log.info("updated balance is: " + Double.valueOf(nPage3.getAccountBalances(driver).substring(1)));
 
-	// private methods
-	private WebDriver registerCustomerAndCreateBalance(WebDriver driver) throws Exception {
+        // Assertion based on updated account balance less than initial account
+        // balance
+        if (Double.valueOf(nPage3.getAccountBalances(driver).substring(1)) < Double.valueOf(initialBalance)) {
+            balanceUpdated = true;
+        }
 
-		// create balance via soap api
-		SOAPClientSAAJ sClient = new SOAPClientSAAJ();
-		CreditCardNumberGenerator ccGenerator = new CreditCardNumberGenerator();
-		String validCCNumber = ccGenerator.generate("4", 16);
-		String accountID = sClient.createABPAccountSOAPCall(validCCNumber);
-		Log.info("cc number being used is " + validCCNumber);
-		Log.info("account id being returned is " + accountID);
+        Assert.assertTrue(balanceUpdated);
+        driver.close();
 
-		// Create customer test data via rest api
-		cData = ApiCustomerPost.apiPostSuccess();
-		email = cData.getEmail();
-		phoneNumber = cData.getPhone();
-		Log.info("Email and phone number from API:  " + email + " " + phoneNumber);
+    }
 
-		// return to selenium testing
-		coreTest.signIn(driver);
-		SearchPage sPage = getSearchPage();
-		sPage.selectSearchTypeCustomer(driver);
-		sPage.clickCustomerType(driver, "Individual");
-		sPage.enterEmail(driver, email);
-		sPage.clickSearch(driver);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
-		Utils.waitTime(8000);
-		sPage.clickRecord(driver);
-		sPage.clickSecurityBox(driver);
-		sPage.clickContiune(driver);
+    // private methods
+    private WebDriver registerCustomerAndCreateBalance(WebDriver driver) throws Exception {
 
-		BasePage bPage = new BasePage(driver);
-		Utils.waitTime(5000);
-		bPage.clickLinkAccount(driver);
-		LinkAccountPage lPage = new LinkAccountPage(driver);
+        // create balance via soap api
+        SOAPClientSAAJ sClient = new SOAPClientSAAJ();
+        CreditCardNumberGenerator ccGenerator = new CreditCardNumberGenerator();
+        String validCCNumber = ccGenerator.generate("4", 16);
+        String accountID = sClient.createABPAccountSOAPCall(validCCNumber);
+        Log.info("cc number being used is " + validCCNumber);
+        Log.info("account id being returned is " + accountID);
 
-		// use cc number from soap call to link account
-		lPage.enterBankAccount(driver, validCCNumber);
-		lPage.selectExpMonth(driver);
-		lPage.selectExpYear(driver, 2);
-		lPage.clickSearchToken(driver);
-		lPage.enterNickName(driver, Global.NICKNAME);
-		lPage.clickRegisterAndLink(driver);
-		Utils.waitTime(12000);
+        // Create customer test data via rest api
+        cData = ApiCustomerPost.apiPostSuccess();
+        email = cData.getEmail();
+        phoneNumber = cData.getPhone();
+        Log.info("Email and phone number from API:  " + email + " " + phoneNumber);
 
-		// check balance history
-		bPage.clickBalanceHistory(driver);
-		return driver;
-	}
+        // return to selenium testing
+        coreTest.signIn(driver);
+        SearchPage sPage = getSearchPage();
+        sPage.selectSearchTypeCustomer(driver);
+        sPage.clickCustomerType(driver, "Traveler");
+        sPage.enterEmail(driver, email);
+        sPage.clickSearch(driver);
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
+        Utils.waitTime(8000);
+        sPage.clickRecord(driver);
+        sPage.clickSecurityBox(driver);
+        sPage.clickContiune(driver);
 
-	// load value on CC and register customer and link
-	private WebDriver loadValueAndRegisterCustomer(WebDriver driver) throws Exception {
+        BasePage bPage = new BasePage(driver);
+        Utils.waitTime(5000);
+        bPage.clickLinkAccount(driver);
+        LinkAccountPage lPage = new LinkAccountPage(driver);
 
-		// load value on token via soap api
-		SOAPClientSAAJ sClient = new SOAPClientSAAJ();
-		validCCNumber = ccGenerator.generate("4", 16);
-		sClient.loadValueSOAPCall(validCCNumber);
-		Log.info("cc number being used is " + validCCNumber);
+        // use cc number from soap call to link account
+        lPage.enterBankAccount(driver, validCCNumber);
+        lPage.selectExpMonth(driver);
+        lPage.selectExpYear(driver, 2);
+        lPage.clickSearchToken(driver);
+        lPage.enterNickName(driver, Global.NICKNAME);
+        lPage.clickRegisterAndLink(driver);
+        Utils.waitTime(12000);
 
-		// Create customer test data via rest api
-		cData = ApiCustomerPost.apiPostSuccess();
-		email = cData.getEmail();
-		phoneNumber = cData.getPhone();
-		Log.info("Email and phone number from API:  " + email + " " + phoneNumber);
+        // check balance history
+        bPage.clickBalanceHistory(driver);
+        return driver;
+    }
 
-		// return to selenium testing
-		coreTest.signIn(driver);
-		SearchPage sPage = getSearchPage();
-		sPage.selectSearchTypeCustomer(driver);
-		sPage.clickCustomerType(driver, "Individual");
-		sPage.enterEmail(driver, email);
-		sPage.clickSearch(driver);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
-		Utils.waitTime(8000);
-		sPage.clickRecord(driver);
-		sPage.clickSecurityBox(driver);
-		sPage.clickContiune(driver);
+    // load value on CC and register customer and link
+    private WebDriver loadValueAndRegisterCustomer(WebDriver driver) throws Exception {
 
-		// use cc number from soap call to link account
-		BasePage bPage = new BasePage(driver);
-		Utils.waitTime(8000);
-		bPage.clickLinkAccount(driver);
-		LinkAccountPage lPage = new LinkAccountPage(driver);
-		lPage.enterBankAccount(driver, validCCNumber);
-		lPage.selectExpMonth(driver);
-		lPage.selectExpYear(driver, 2);
-		lPage.clickSearchToken(driver);
-		lPage.enterNickName(driver, Global.NICKNAME);
-		lPage.clickRegisterAndLink(driver);
+        // load value on token via soap api
+        SOAPClientSAAJ sClient = new SOAPClientSAAJ();
+        validCCNumber = ccGenerator.generate("4", 16);
+        sClient.loadValueSOAPCall(validCCNumber);
+        Log.info("cc number being used is " + validCCNumber);
 
-		return driver;
-	}
+        // Create customer test data via rest api
+        cData = ApiCustomerPost.apiPostSuccess();
+        email = cData.getEmail();
+        phoneNumber = cData.getPhone();
+        Log.info("Email and phone number from API:  " + email + " " + phoneNumber);
 
-	private TokenSearchPage getTokenSearchPage() throws Exception {
-		DashboardPage dashPage = new DashboardPage(driver);
-		dashPage.clickCustomerTab(driver);
-		dashPage.switchToFrame(driver);
-		TokenSearchPage tPage = new TokenSearchPage(driver);
-		return tPage;
-	}
+        // return to selenium testing
+        coreTest.signIn(driver);
+        SearchPage sPage = getSearchPage();
+        sPage.selectSearchTypeCustomer(driver);
+        sPage.clickCustomerType(driver, "Traveler");
+        sPage.enterEmail(driver, email);
+        sPage.clickSearch(driver);
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
+        Utils.waitTime(8000);
+        sPage.clickRecord(driver);
+        sPage.clickSecurityBox(driver);
+        sPage.clickContiune(driver);
 
-	private SearchPage getSearchPage() throws Exception {
-		DashboardPage dashPage = new DashboardPage(driver);
-		dashPage.clickCustomerTab(driver);
-		dashPage.switchToFrame(driver);
-		SearchPage sPage = new SearchPage(driver);
-		return sPage;
-	}
+        // use cc number from soap call to link account
+        BasePage bPage = new BasePage(driver);
+        Utils.waitTime(8000);
+        bPage.clickLinkAccount(driver);
+        LinkAccountPage lPage = new LinkAccountPage(driver);
+        lPage.enterBankAccount(driver, validCCNumber);
+        lPage.selectExpMonth(driver);
+        lPage.selectExpYear(driver, 2);
+        lPage.clickSearchToken(driver);
+        lPage.enterNickName(driver, Global.NICKNAME);
+        lPage.clickRegisterAndLink(driver);
 
-	@AfterMethod
-	public void tearDown() {
-		Log.info("TearDown Complete");
-		Reporter.log("TearDown Complete");
-		driver.quit();
+        return driver;
+    }
 
-	}
+    private TokenSearchPage getTokenSearchPage() throws Exception {
+        DashboardPage dashPage = new DashboardPage(driver);
+        dashPage.clickCustomerTab(driver);
+        dashPage.switchToFrame(driver);
+        TokenSearchPage tPage = new TokenSearchPage(driver);
+        return tPage;
+    }
+
+    private SearchPage getSearchPage() throws Exception {
+        DashboardPage dashPage = new DashboardPage(driver);
+        dashPage.clickCustomerTab(driver);
+        dashPage.switchToFrame(driver);
+        SearchPage sPage = new SearchPage(driver);
+        return sPage;
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        Log.info("TearDown Complete");
+        Reporter.log("TearDown Complete");
+        driver.quit();
+
+    }
 }
