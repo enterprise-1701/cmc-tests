@@ -1,11 +1,15 @@
 package com.cubic.cmctests.testslegacy;
 
 import java.util.concurrent.TimeUnit;
+
+import com.cubic.accelerators.RESTActions;
+import com.cubic.accelerators.RESTEngine;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.os.WindowsUtils;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -20,7 +24,7 @@ import com.cubic.cmcjava.utils.*;
 //Quality Center Test IDs: 77374, 77373
 //#################################################################################
 
-public class DeleteFundingTest {
+public class DeleteFundingTest extends RESTEngine {
 
 	private static Logger Log = Logger.getLogger(Logger.class.getName());
 	private static final String STATUS = "Active";
@@ -32,6 +36,7 @@ public class DeleteFundingTest {
 	static String browser;
 	private static final Integer PAYMENT_TYPE = 1;
 	CoreTest coreTest = new CoreTest();
+	RESTActions restActions;
 
 	@Parameters("browser")
 	@BeforeMethod
@@ -49,40 +54,73 @@ public class DeleteFundingTest {
 
 	//User should not be able to delete a single funding source 
 	@Test(priority = 1, enabled = true)
-	public void deleteFundingSource() throws Exception {
+	public void deleteFundingSource(ITestContext context) throws Exception {
+		String testCaseName = "29936:deleteFundingSource";
 
-	    Log.info("29936");
-		getDeleteFundingSourceConfirmation(driver);
-		ConfirmationPage cPage = new ConfirmationPage(driver);
-		Utils.waitTime(5000);
-		cPage.clickConfirmDelete(driver);
-		Utils.waitTime(5000);
-		Assert.assertEquals(cPage.getNoRecordFoundFundingSource(driver), NO_RECORD);
-		driver.close();
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29936");
+			getDeleteFundingSourceConfirmation(driver);
+			ConfirmationPage cPage = new ConfirmationPage(driver);
+			Utils.waitTime(5000);
+			cPage.clickConfirmDelete(driver);
+			Utils.waitTime(5000);
+			Assert.assertEquals(cPage.getNoRecordFoundFundingSource(driver), NO_RECORD);
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
-	// fail due to absoulute path 
+	// fail due to absolute path
 	@Test(priority = 2, enabled = true)
-	public void deleteFundingSourceClose() throws Exception {
+	public void deleteFundingSourceClose(ITestContext context) throws Exception {
+		String testCaseName = "185966:deleteFundingSourceClose";
 
-	    Log.info("185966");
-		getDeleteFundingSourceConfirmation(driver);
-		ConfirmationPage cPage = new ConfirmationPage(driver);
-		Utils.waitTime(5000);
-		cPage.clickCloseFundingSource(driver);
-		Assert.assertEquals(cPage.getFundingSourceStatus(driver), STATUS);
-		driver.close();
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("185966");
+			getDeleteFundingSourceConfirmation(driver);
+			ConfirmationPage cPage = new ConfirmationPage(driver);
+			Utils.waitTime(5000);
+			cPage.clickCloseFundingSource(driver);
+			Assert.assertEquals(cPage.getFundingSourceStatus(driver), STATUS);
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
 	@Test(priority = 3, enabled = true)
-	public void deleteFundingSourceCancel() throws Exception {
+	public void deleteFundingSourceCancel(ITestContext context) throws Exception {
+		String testCaseName = "29935:deleteFundingSourceCancel";
 
-	    Log.info("29935");
-		getDeleteFundingSourceConfirmation(driver);
-		ConfirmationPage cPage = new ConfirmationPage(driver);
-		cPage.clickCancel(driver);
-		Assert.assertEquals(cPage.getFundingSourceStatus(driver), STATUS);
-		driver.close();
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29935");
+			getDeleteFundingSourceConfirmation(driver);
+			ConfirmationPage cPage = new ConfirmationPage(driver);
+			cPage.clickCancel(driver);
+			Assert.assertEquals(cPage.getFundingSourceStatus(driver), STATUS);
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
 	// private method - create customer and funding source and attempt to delete

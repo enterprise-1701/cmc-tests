@@ -1,11 +1,15 @@
 package com.cubic.cmctests.testslegacy;
 
 import java.util.concurrent.TimeUnit;
+
+import com.cubic.accelerators.RESTActions;
+import com.cubic.accelerators.RESTEngine;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.os.WindowsUtils;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -21,7 +25,7 @@ import com.cubic.cmcjava.utils.*;
 //#################################################################################
 //Failure due to existing notification bug.
 
-public class NotificationPrefTest {
+public class NotificationPrefTest extends RESTEngine {
 
 	private static String phoneNumber;
 	private static String email;
@@ -30,6 +34,7 @@ public class NotificationPrefTest {
 	static WebDriver driver;
 	static String browser;
 	CoreTest coreTest = new CoreTest();
+	RESTActions restActions;
 
 	@Parameters("browser")
 	@BeforeMethod
@@ -53,40 +58,60 @@ public class NotificationPrefTest {
 	 * @throws Exception
 	 */
 	@Test(priority = 1, enabled = true)
-	public void changeNotificationPrefSubmit() throws Exception {
+	public void changeNotificationPrefSubmit(ITestContext context) throws Exception {
+		String testCaseName = "29949:changeNotificationPrefSubmit";
 
-	    Log.info("29949");
-		createNewCustomer(driver);
-		Utils.waitTime(6000);
-		SearchPage sPage = new SearchPage(driver);
-		Utils.waitTime(6000);
-		sPage.clickNotificationPreferences(driver);
-		Utils.waitTime(6000);
-		NotificationPreferencesPage notiPage = new NotificationPreferencesPage(driver);
-		notiPage.clickSubmit(driver);
-		Utils.waitTime(6000);
-		Assert.assertTrue(notiPage.isCreateAddressLinkDisplayed(driver));
-		driver.close();
-
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29949");
+			createNewCustomer(driver);
+			Utils.waitTime(6000);
+			SearchPage sPage = new SearchPage(driver);
+			Utils.waitTime(6000);
+			sPage.clickNotificationPreferences(driver);
+			Utils.waitTime(6000);
+			NotificationPreferencesPage notiPage = new NotificationPreferencesPage(driver);
+			notiPage.clickSubmit(driver);
+			Utils.waitTime(6000);
+			Assert.assertTrue(notiPage.isCreateAddressLinkDisplayed(driver));
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
 	
 	@Test(priority = 2, enabled = true)
-	public void changeNotificationPrefCancel() throws Exception {
+	public void changeNotificationPrefCancel(ITestContext context) throws Exception {
+		String testCaseName = "29951:changeNotificationPrefCancel";
 
-	    Log.info("29951");
-		createNewCustomer(driver);
-		Utils.waitTime(6000);
-		SearchPage sPage = new SearchPage(driver);
-		Utils.waitTime(6000);
-		sPage.clickNotificationPreferences(driver);
-		Utils.waitTime(6000);
-		NotificationPreferencesPage notiPage = new NotificationPreferencesPage(driver);
-		notiPage.clickCancel(driver);
-		Utils.waitTime(6000);
-		Assert.assertTrue(notiPage.isCreateAddressLinkDisplayed(driver));
-		driver.close();
-
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29951");
+			createNewCustomer(driver);
+			Utils.waitTime(6000);
+			SearchPage sPage = new SearchPage(driver);
+			Utils.waitTime(6000);
+			sPage.clickNotificationPreferences(driver);
+			Utils.waitTime(6000);
+			NotificationPreferencesPage notiPage = new NotificationPreferencesPage(driver);
+			notiPage.clickCancel(driver);
+			Utils.waitTime(6000);
+			Assert.assertTrue(notiPage.isCreateAddressLinkDisplayed(driver));
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 	
 	/**
@@ -104,82 +129,93 @@ public class NotificationPrefTest {
 	 * @throws Exception
 	 */
 	@Test(priority = 3, enabled = true)
-	public void accountNotificationPreferences_updateCategory() throws Exception {
+	public void accountNotificationPreferences_updateCategory(ITestContext context) throws Exception {
+		String testCaseName = "29953:accountNotificationPreferences_updateCategory";
 
-	    Log.info("29953");
-		createNewCustomer(driver);
-		Utils.waitTime(6000);
-		SearchPage sPage = new SearchPage(driver);
-		Utils.waitTime(6000);
-		
-		// open Notification Preferences Update panel
-		sPage.clickNotificationPreferences(driver);
-		Utils.waitTime(6000);
-		
-		// Disable Customer Contact messaging
-		NotificationPreferencesPage notiPage = new NotificationPreferencesPage(driver);
-		
-		// Click the Customer Contact Updates check-box twice to deselect it.
-		notiPage.clickCategoryAccountsCheckbox( driver );
-		Utils.waitTime(1000);
-		notiPage.clickCategoryAccountsCheckbox( driver );
-		Utils.waitTime(6000);
-		
-		// Save the change
-		notiPage.clickSubmit(driver);
-		Utils.waitTime(6000);
-		Assert.assertTrue(notiPage.isCreateAddressLinkDisplayed(driver));
-		Utils.waitTime(6000);
-		
-		// Update Customer Contact Info
-		updateCustomerContact( "jones" );
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29953");
+			createNewCustomer(driver);
+			Utils.waitTime(6000);
+			SearchPage sPage = new SearchPage(driver);
+			Utils.waitTime(6000);
 
-		NotificationHistoryPage notHistory = new NotificationHistoryPage( driver );
-		// Open Notification History list
-		notHistory.clickIcon();
-		
-		// Verify no Customer Contact Update message is sent
-		Assert.assertFalse("Customer Contact Update".equals( notHistory.getSubject()),
-				"MOST RECENT MESSAGE IS 'Customer Contact Update' BUT IT SHOULD NOT BE");
-		
-		// close Notification History list
-		notHistory.clickIcon();
-		Utils.waitTime(6000);
-		
-		// Re-enable Customer Contact messaging
-		sPage.clickNotificationPreferences(driver);
-		Utils.waitTime(6000);
-		
-		// Click the Customer Contact Updates check-box twice to reselect it
-		notiPage.clickCategoryAccountsCheckbox( driver );
-		Utils.waitTime(1000);
-		
-		// Save the change
-		notiPage.clickSubmit(driver);
-		Utils.waitTime(6000);
-		Assert.assertTrue(notiPage.isCreateAddressLinkDisplayed(driver));
-		Utils.waitTime(6000);
-		
-		// Update Customer Contact Info again to cause a
-		// 'Customer Contact Update' message to be sent
-		updateCustomerContact( "smith" );
-		
-		// wait for list update
-		//Utils.waitTime(240000);
-		
-		// open Notification History list
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
-		notHistory.clickIcon();
-		Utils.waitTime(6000);
-		
-		// Verify a Customer Contact Update was sent
-		Assert.assertTrue("Customer Contact Update".equals( notHistory.getSubject()),
-				"MOST RECENT MESSAGE IS NOT 'Customer Contact Update' BUT IT SHOULD BE");	
-		
-		// close Notification History list
-		notHistory.clickIcon();		
-		
-		driver.close();
+			// open Notification Preferences Update panel
+			sPage.clickNotificationPreferences(driver);
+			Utils.waitTime(6000);
+
+			// Disable Customer Contact messaging
+			NotificationPreferencesPage notiPage = new NotificationPreferencesPage(driver);
+
+			// Click the Customer Contact Updates check-box twice to deselect it.
+			notiPage.clickCategoryAccountsCheckbox(driver);
+			Utils.waitTime(1000);
+			notiPage.clickCategoryAccountsCheckbox(driver);
+			Utils.waitTime(6000);
+
+			// Save the change
+			notiPage.clickSubmit(driver);
+			Utils.waitTime(6000);
+			Assert.assertTrue(notiPage.isCreateAddressLinkDisplayed(driver));
+			Utils.waitTime(6000);
+
+			// Update Customer Contact Info
+			updateCustomerContact("jones");
+
+			NotificationHistoryPage notHistory = new NotificationHistoryPage(driver);
+			// Open Notification History list
+			notHistory.clickIcon();
+
+			// Verify no Customer Contact Update message is sent
+			Assert.assertFalse("Customer Contact Update".equals(notHistory.getSubject()),
+					"MOST RECENT MESSAGE IS 'Customer Contact Update' BUT IT SHOULD NOT BE");
+
+			// close Notification History list
+			notHistory.clickIcon();
+			Utils.waitTime(6000);
+
+			// Re-enable Customer Contact messaging
+			sPage.clickNotificationPreferences(driver);
+			Utils.waitTime(6000);
+
+			// Click the Customer Contact Updates check-box twice to reselect it
+			notiPage.clickCategoryAccountsCheckbox(driver);
+			Utils.waitTime(1000);
+
+			// Save the change
+			notiPage.clickSubmit(driver);
+			Utils.waitTime(6000);
+			Assert.assertTrue(notiPage.isCreateAddressLinkDisplayed(driver));
+			Utils.waitTime(6000);
+
+			// Update Customer Contact Info again to cause a
+			// 'Customer Contact Update' message to be sent
+			updateCustomerContact("smith");
+
+			// wait for list update
+			//Utils.waitTime(240000);
+
+			// open Notification History list
+			((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
+			notHistory.clickIcon();
+			Utils.waitTime(6000);
+
+			// Verify a Customer Contact Update was sent
+			Assert.assertTrue("Customer Contact Update".equals(notHistory.getSubject()),
+					"MOST RECENT MESSAGE IS NOT 'Customer Contact Update' BUT IT SHOULD BE");
+
+			// close Notification History list
+			notHistory.clickIcon();
+
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 	
 	/**
@@ -199,52 +235,63 @@ public class NotificationPrefTest {
 	 * @throws Exception
 	 */
 	@Test(priority = 4, enabled = true)
-	public void accountNotificationPreferences_noUpdateCategory() throws Exception {
-		
-	    Log.info("29954");
-	    createNewCustomer(driver);
-		Utils.waitTime(6000);
-		SearchPage sPage = new SearchPage(driver);
-		Utils.waitTime(6000);
-		
-		// open Notification Preferences Update panel
-		sPage.clickNotificationPreferences(driver);
-		Utils.waitTime(6000);
-		
-		// Disable Customer Contact messaging
-		NotificationPreferencesPage notiPage = new NotificationPreferencesPage(driver);
-		
-		// Click the Customer Contact Updates check-box twice to deselect it.
-		notiPage.clickCategoryAccountsCheckbox( driver );
-		Utils.waitTime(1000);
-		notiPage.clickCategoryAccountsCheckbox( driver );
-		Utils.waitTime(6000);
-		
-		// Don't save the change
-		notiPage.clickCancel(driver);
-		Utils.waitTime(6000);
-		Assert.assertTrue(notiPage.isCreateAddressLinkDisplayed(driver));
-		Utils.waitTime(6000);
-		
-		// Update Customer Contact Info
-		updateCustomerContact( "jones" );
+	public void accountNotificationPreferences_noUpdateCategory(ITestContext context) throws Exception {
+		String testCaseName = "29954:accountNotificationPreferences_noUpdateCategory";
 
-		// wait for list update
-		//Utils.waitTime(240000);		
-		
-		NotificationHistoryPage notHistory = new NotificationHistoryPage( driver );
-		// Open Notification History list
-		notHistory.clickIcon();
-	
-		// Verify a Customer Contact Update was sent
-		Assert.assertTrue("Customer Contact Update".equals( notHistory.getSubject()),
-				"MOST RECENT MEE IS NOT 'Customer Contact Update' BUT IT SHOULD BE");		
-		
-		// close Notification History list
-		notHistory.clickIcon();
-		Utils.waitTime(6000);
-		
-		driver.close();
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29954");
+			createNewCustomer(driver);
+			Utils.waitTime(6000);
+			SearchPage sPage = new SearchPage(driver);
+			Utils.waitTime(6000);
+
+			// open Notification Preferences Update panel
+			sPage.clickNotificationPreferences(driver);
+			Utils.waitTime(6000);
+
+			// Disable Customer Contact messaging
+			NotificationPreferencesPage notiPage = new NotificationPreferencesPage(driver);
+
+			// Click the Customer Contact Updates check-box twice to deselect it.
+			notiPage.clickCategoryAccountsCheckbox(driver);
+			Utils.waitTime(1000);
+			notiPage.clickCategoryAccountsCheckbox(driver);
+			Utils.waitTime(6000);
+
+			// Don't save the change
+			notiPage.clickCancel(driver);
+			Utils.waitTime(6000);
+			Assert.assertTrue(notiPage.isCreateAddressLinkDisplayed(driver));
+			Utils.waitTime(6000);
+
+			// Update Customer Contact Info
+			updateCustomerContact("jones");
+
+			// wait for list update
+			//Utils.waitTime(240000);
+
+			NotificationHistoryPage notHistory = new NotificationHistoryPage(driver);
+			// Open Notification History list
+			notHistory.clickIcon();
+
+			// Verify a Customer Contact Update was sent
+			Assert.assertTrue("Customer Contact Update".equals(notHistory.getSubject()),
+					"MOST RECENT MEE IS NOT 'Customer Contact Update' BUT IT SHOULD BE");
+
+			// close Notification History list
+			notHistory.clickIcon();
+			Utils.waitTime(6000);
+
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 	
 	/**

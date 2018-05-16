@@ -1,10 +1,14 @@
 package com.cubic.cmctests.testslegacy;
 
 import java.util.concurrent.TimeUnit;
+
+import com.cubic.accelerators.RESTActions;
+import com.cubic.accelerators.RESTEngine;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.os.WindowsUtils;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -21,7 +25,7 @@ import org.openqa.selenium.JavascriptExecutor;
 //
 //#################################################################################
 
-public class UpdateFundingTest {
+public class UpdateFundingTest extends RESTEngine {
 
 	private static Logger Log = Logger.getLogger(Logger.class.getName());
 
@@ -31,6 +35,7 @@ public class UpdateFundingTest {
 	private static String phoneNumber;
 	private static String email;
 	private static CustomerData cData;
+	RESTActions restActions;
 
 	@Parameters("browser")
 	@BeforeMethod
@@ -48,159 +53,207 @@ public class UpdateFundingTest {
 
 	// Test case for updating non-primary card
 	@Test(priority = 1, enabled = true)
-	public void updateNonPrimaryFundingTest() throws Exception {
+	public void updateNonPrimaryFundingTest(ITestContext context) throws Exception {
+		String testCaseName = "29980:updateNonPrimaryFundingTest";
 
-	    Log.info("29980");
-		createNewCustomer(driver);
-		NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
-		Utils.waitTime(5000);
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29980");
+			createNewCustomer(driver);
+			NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
+			Utils.waitTime(5000);
 
-		nPage3.clickCreateFundingSoruce(driver);
-		CreateFundingPage cPage = new CreateFundingPage(driver);
-		Utils.waitTime(5000);
-		cPage.selectPaymentType(driver, 1);
-		cPage.enterName(driver, Global.CCNAME);
-		cPage.enterCC(driver, Global.CC);
-		cPage.selectMonth(driver);
-		cPage.selectYear(driver);
-		cPage.clickSubmit(driver);
-		Utils.waitTime(5000);
+			nPage3.clickCreateFundingSoruce(driver);
+			CreateFundingPage cPage = new CreateFundingPage(driver);
+			Utils.waitTime(5000);
+			cPage.selectPaymentType(driver, 1);
+			cPage.enterName(driver, Global.CCNAME);
+			cPage.enterCC(driver, Global.CC);
+			cPage.selectMonth(driver);
+			cPage.selectYear(driver);
+			cPage.clickSubmit(driver);
+			Utils.waitTime(5000);
 
-		nPage3.clickCreateFundingSoruce(driver);
-		cPage.enterName(driver, Global.CCNAME2);
-		cPage.enterCC(driver, Global.CC2);
-		cPage.selectMonth(driver);
-		cPage.selectYear(driver);
-		cPage.clickSetPrimary(driver);
-		cPage.clickYesWarning(driver);
-		cPage.clickSubmit(driver);
-		Utils.waitTime(5000);
-		nPage3.clickFundingSourceExpand(driver);
-		Utils.waitTime(3000);
-		cPage.clickCardNumber2(driver);
-		Utils.waitTime(3000);
-		cPage.clearName(driver);
-		cPage.enterName(driver, Global.FULLNAME);
-		cPage.clickSubmit(driver);
-		Utils.waitTime(5000);
-	
+			nPage3.clickCreateFundingSoruce(driver);
+			cPage.enterName(driver, Global.CCNAME2);
+			cPage.enterCC(driver, Global.CC2);
+			cPage.selectMonth(driver);
+			cPage.selectYear(driver);
+			cPage.clickSetPrimary(driver);
+			cPage.clickYesWarning(driver);
+			cPage.clickSubmit(driver);
+			Utils.waitTime(5000);
+			nPage3.clickFundingSourceExpand(driver);
+			Utils.waitTime(3000);
+			cPage.clickCardNumber2(driver);
+			Utils.waitTime(3000);
+			cPage.clearName(driver);
+			cPage.enterName(driver, Global.FULLNAME);
+			cPage.clickSubmit(driver);
+			Utils.waitTime(5000);
 
-		// Assertions on second card
-		Assert.assertEquals(cPage.getCCname2(driver), Global.FULLNAME);
-		driver.close();
+
+			// Assertions on second card
+			Assert.assertEquals(cPage.getCCname2(driver), Global.FULLNAME);
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
 	@Test(priority = 2, enabled = true)
-	public void updateNonPrimaryFundingCancelTest() throws Exception {
+	public void updateNonPrimaryFundingCancelTest(ITestContext context) throws Exception {
+		String testCaseName = "29981:updateNonPrimaryFundingCancelTest";
 
-	    Log.info("29981");
-		createNewCustomer(driver);
-		NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
-		Utils.waitTime(5000);
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29981");
+			createNewCustomer(driver);
+			NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
+			Utils.waitTime(5000);
 
-		nPage3.clickCreateFundingSoruce(driver);
-		CreateFundingPage cPage = new CreateFundingPage(driver);
-		cPage.selectPaymentType(driver, 1);
-		cPage.enterName(driver, Global.CCNAME);
-		cPage.enterCC(driver, Global.CC);
-		cPage.selectMonth(driver);
-		cPage.selectYear(driver);
-		cPage.clickSubmit(driver);
-		Utils.waitTime(5000);
+			nPage3.clickCreateFundingSoruce(driver);
+			CreateFundingPage cPage = new CreateFundingPage(driver);
+			cPage.selectPaymentType(driver, 1);
+			cPage.enterName(driver, Global.CCNAME);
+			cPage.enterCC(driver, Global.CC);
+			cPage.selectMonth(driver);
+			cPage.selectYear(driver);
+			cPage.clickSubmit(driver);
+			Utils.waitTime(5000);
 
-		nPage3.clickFundingSource(driver);
-		cPage.enterName(driver, Global.CCNAME2);
-		cPage.enterCC(driver, Global.CC2);
-		cPage.selectMonth(driver);
-		cPage.selectYear(driver);
-		cPage.clickSetPrimary(driver);
-		cPage.clickYesWarning(driver);
-		cPage.clickSubmit(driver);
-		Utils.waitTime(5000);
-		nPage3.clickFundingSourceExpand(driver);
-		Utils.waitTime(3000);
-		cPage.clickCardNumber2(driver);
-		Utils.waitTime(3000);
-		cPage.clearName(driver);
-		cPage.enterName(driver, Global.FULLNAME);
-		cPage.clickCancel(driver);
-		Utils.waitTime(5000);
+			nPage3.clickFundingSource(driver);
+			cPage.enterName(driver, Global.CCNAME2);
+			cPage.enterCC(driver, Global.CC2);
+			cPage.selectMonth(driver);
+			cPage.selectYear(driver);
+			cPage.clickSetPrimary(driver);
+			cPage.clickYesWarning(driver);
+			cPage.clickSubmit(driver);
+			Utils.waitTime(5000);
+			nPage3.clickFundingSourceExpand(driver);
+			Utils.waitTime(3000);
+			cPage.clickCardNumber2(driver);
+			Utils.waitTime(3000);
+			cPage.clearName(driver);
+			cPage.enterName(driver, Global.FULLNAME);
+			cPage.clickCancel(driver);
+			Utils.waitTime(5000);
 
-		// Assertions on second card
-		Assert.assertEquals(cPage.getCCname2(driver), Global.CCNAME2);
-		driver.close();
+			// Assertions on second card
+			Assert.assertEquals(cPage.getCCname2(driver), Global.CCNAME2);
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
 	// Test case for updating primary card
 	@Test(priority = 3, enabled = true)
-	public void updatePrimaryFundingTest() throws Exception {
+	public void updatePrimaryFundingTest(ITestContext context) throws Exception {
+		String testCaseName = "29982";
 
-	    Log.info("29982");
-		createNewCustomer(driver);
-		NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
-		Utils.waitTime(5000);
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29982");
+			createNewCustomer(driver);
+			NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
+			Utils.waitTime(5000);
 
-		nPage3.clickCreateFundingSoruce(driver);
-		CreateFundingPage cPage = new CreateFundingPage(driver);
-		cPage.selectPaymentType(driver, 1);
-		cPage.enterName(driver, Global.CCNAME);
-		cPage.enterCC(driver, Global.CC);
-		cPage.selectMonth(driver);
-		cPage.selectYear(driver);
-		cPage.clickSubmit(driver);
-		Utils.waitTime(5000);
-		nPage3.clickFundingSourceExpand(driver);
-		Utils.waitTime(5000);
-		cPage.clickCardNumber(driver);
-		Utils.waitTime(5000);
-		
-		cPage.clearName(driver);
-		cPage.enterName(driver, Global.FULLNAME);
-		cPage.clickSubmit(driver);
-		Utils.waitTime(5000);
-		
+			nPage3.clickCreateFundingSoruce(driver);
+			CreateFundingPage cPage = new CreateFundingPage(driver);
+			cPage.selectPaymentType(driver, 1);
+			cPage.enterName(driver, Global.CCNAME);
+			cPage.enterCC(driver, Global.CC);
+			cPage.selectMonth(driver);
+			cPage.selectYear(driver);
+			cPage.clickSubmit(driver);
+			Utils.waitTime(5000);
+			nPage3.clickFundingSourceExpand(driver);
+			Utils.waitTime(5000);
+			cPage.clickCardNumber(driver);
+			Utils.waitTime(5000);
 
-		// Assertions on first card
-		Assert.assertEquals(cPage.getCCname(driver), Global.FULLNAME);
-		driver.close();
+			cPage.clearName(driver);
+			cPage.enterName(driver, Global.FULLNAME);
+			cPage.clickSubmit(driver);
+			Utils.waitTime(5000);
+
+
+			// Assertions on first card
+			Assert.assertEquals(cPage.getCCname(driver), Global.FULLNAME);
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
 	// Test case for updating primary card
 	@Test(priority = 4, enabled = true)
-	public void updatePrimaryFundingCancelTest() throws Exception {
-	    
-	    Log.info("29983");
-		createNewCustomer(driver);
-		NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
-		Utils.waitTime(5000);
-		nPage3.clickCreateFundingSoruce(driver);
-		CreateFundingPage cPage = new CreateFundingPage(driver);
-		cPage.selectPaymentType(driver, 1);
-		cPage.enterName(driver, Global.CCNAME);
-		cPage.enterCC(driver, Global.CC);
-		cPage.selectMonth(driver);
-		cPage.selectYear(driver);
-		cPage.clickSubmit(driver);
-		Utils.waitTime(5000);
-		nPage3.clickFundingSourceExpand(driver);
-		Utils.waitTime(3000);
-		cPage.clickCardNumber(driver);
-		Utils.waitTime(3000);
-		cPage.clearName(driver);
-		cPage.enterName(driver, Global.FULLNAME);
-		cPage.clickCancel(driver);
-		Utils.waitTime(3000);
+	public void updatePrimaryFundingCancelTest(ITestContext context) throws Exception {
+		String testCaseName = "29983:updatePrimaryFundingCancelTest";
 
-		// Assertions on first card
-		Assert.assertEquals(cPage.getCCname(driver), Global.CCNAME);
-		driver.close();
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29983");
+			createNewCustomer(driver);
+			NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
+			Utils.waitTime(5000);
+			nPage3.clickCreateFundingSoruce(driver);
+			CreateFundingPage cPage = new CreateFundingPage(driver);
+			cPage.selectPaymentType(driver, 1);
+			cPage.enterName(driver, Global.CCNAME);
+			cPage.enterCC(driver, Global.CC);
+			cPage.selectMonth(driver);
+			cPage.selectYear(driver);
+			cPage.clickSubmit(driver);
+			Utils.waitTime(5000);
+			nPage3.clickFundingSourceExpand(driver);
+			Utils.waitTime(3000);
+			cPage.clickCardNumber(driver);
+			Utils.waitTime(3000);
+			cPage.clearName(driver);
+			cPage.enterName(driver, Global.FULLNAME);
+			cPage.clickCancel(driver);
+			Utils.waitTime(3000);
+
+			// Assertions on first card
+			Assert.assertEquals(cPage.getCCname(driver), Global.CCNAME);
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
-	
-	
-		@Test(priority = 5, enabled = true)
-		public void updatePrimaryFundingCloseTest() throws Exception {
-		    
-		    Log.info("186002");
+
+
+	@Test(priority = 5, enabled = true)
+	public void updatePrimaryFundingCloseTest(ITestContext context) throws Exception {
+		String testCaseName = "186002:updatePrimaryFundingCloseTest";
+
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("186002");
 			createNewCustomer(driver);
 			NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
 			Utils.waitTime(5000);
@@ -225,7 +278,14 @@ public class UpdateFundingTest {
 			// Assertions on first card
 			Assert.assertEquals(cPage.getCCname(driver), Global.CCNAME);
 			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
 		}
+	}
 
 	private SearchPage getSearchPage() throws Exception {
 		DashboardPage dashPage = new DashboardPage(driver);

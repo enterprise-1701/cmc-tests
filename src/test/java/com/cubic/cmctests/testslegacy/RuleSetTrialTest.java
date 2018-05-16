@@ -3,9 +3,12 @@ package com.cubic.cmctests.testslegacy;
 import java.awt.AWTException;
 import java.util.concurrent.TimeUnit;
 
+import com.cubic.accelerators.RESTActions;
+import com.cubic.accelerators.RESTEngine;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.os.WindowsUtils;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -17,12 +20,13 @@ import com.cubic.cmcjava.utils.Global;
 import com.cubic.cmcjava.utils.Logging;
 import com.cubic.cmcjava.utils.Utils;
 
-public class RuleSetTrialTest {
+public class RuleSetTrialTest extends RESTEngine {
 
 	private static Logger Log = Logger.getLogger(Logger.class.getName());
 	
 	WebDriver driver;
 	CoreTest coreTest = new CoreTest();
+	RESTActions restActions;
 	
 	@Parameters("browser")
 	@BeforeMethod
@@ -37,24 +41,37 @@ public class RuleSetTrialTest {
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		Log.info("Setup Completed");
 	}	
-	
+
+	// TODO: Need a test case number
 	@Test(priority = 1, enabled = true)
-	public void createRuleSetTrial() throws Exception {
-		coreTest.signIn(driver);
-		
-		FinancePage finPage = getFinancePage();
-		finPage.clickRuleSetTrialRunsLink( driver );
-		finPage.clickCreateTrialLink(driver);
-		
-		CreateRuleSetTrialPage createTrialPage = new CreateRuleSetTrialPage(driver);
-		createTrialPage.selectRuleSet(driver, "Rule Set No. 1");
-		createTrialPage.setSettlementFromDate(driver, "09/01/2017");
-		createTrialPage.setSettlementToDate(driver, "11/06/2017");
-		createTrialPage.setTransactionFromDate(driver, "11/15/2017");
-		createTrialPage.setTransactionToDate(driver, "11/27/2017");
-		createTrialPage.selectAcquirer(driver, "ABP");
-		createTrialPage.setBatch(driver, "0");
-		createTrialPage.clickSubmitButton(driver);
+	public void createRuleSetTrial(ITestContext context) throws Exception {
+		String testCaseName = ":createRuleSetTrial";
+
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			coreTest.signIn(driver);
+
+			FinancePage finPage = getFinancePage();
+			finPage.clickRuleSetTrialRunsLink(driver);
+			finPage.clickCreateTrialLink(driver);
+
+			CreateRuleSetTrialPage createTrialPage = new CreateRuleSetTrialPage(driver);
+			createTrialPage.selectRuleSet(driver, "Rule Set No. 1");
+			createTrialPage.setSettlementFromDate(driver, "09/01/2017");
+			createTrialPage.setSettlementToDate(driver, "11/06/2017");
+			createTrialPage.setTransactionFromDate(driver, "11/15/2017");
+			createTrialPage.setTransactionToDate(driver, "11/27/2017");
+			createTrialPage.selectAcquirer(driver, "ABP");
+			createTrialPage.setBatch(driver, "0");
+			createTrialPage.clickSubmitButton(driver);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 	
 	private FinancePage getFinancePage() throws InterruptedException, AWTException {
