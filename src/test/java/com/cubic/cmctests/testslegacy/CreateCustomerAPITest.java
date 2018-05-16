@@ -10,7 +10,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
+import org.testng.ITestContext;
+import com.cubic.accelerators.RESTActions;
+import com.cubic.accelerators.RESTEngine;
 import com.cubic.cmcjava.pageobjects.*;
 import com.cubic.cmcjava.restapi.ApiCustomerPost;
 import com.cubic.cmcjava.utils.*;
@@ -19,8 +21,7 @@ import com.cubic.cmcjava.utils.*;
 // 
 //#################################################################################
 
-public class CreateCustomerAPITest {
-
+public class CreateCustomerAPITest extends RESTEngine {
 
 	private static String phoneNumber;
 	private static String email;
@@ -30,6 +31,7 @@ public class CreateCustomerAPITest {
 	CoreTest coreTest = new CoreTest();
 	boolean saveEmail = true;
 	Logger Log = Logger.getLogger(CreateCustomerAPITest.class.getName());
+    RESTActions restActions;
 
 	@Parameters("browser")
 	@BeforeMethod
@@ -46,8 +48,13 @@ public class CreateCustomerAPITest {
 
 	//Test update to GIT
 	@Test(priority = 1, enabled = true)
-	public void createNewCustomerApi() throws Exception {
+	public void createNewCustomerApi(ITestContext context) throws Exception {
 
+	    String testCaseName = "185943: createNewCustomerApi";
+	    
+	    try{
+	        
+	 
 		// Create customer test data via api rest call
 	    Log.info("185943");
 		cData = ApiCustomerPost.apiPostSuccess();
@@ -60,9 +67,10 @@ public class CreateCustomerAPITest {
 		coreTest.signIn(driver);
 		SearchPage sPage = getSearchPage();
 		sPage.selectSearchTypeCustomer(driver);
-		sPage.clickCustomerType(driver, "Individual");
+		sPage.clickCustomerType(driver, "Traveler");
 		sPage.enterEmail(driver, email);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 175)", "");
+		Utils.waitTime(30000);
 		sPage.clickSearch(driver);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
 		Utils.waitTime(5000);
@@ -82,6 +90,15 @@ public class CreateCustomerAPITest {
 		Assert.assertEquals(nPage3.getAddress(driver).substring(0, 12), cData.getAddress());
 		
 		driver.close();
+		
+	    }
+	    catch (Exception e) {
+            e.printStackTrace();
+            restActions.failureReport("Exception caught in catch block", "Exception is: " + e);
+            throw new RuntimeException(e);
+        } finally {
+            teardownAutomationTest(context, testCaseName);
+        }
 	}
 	
 	private SearchPage getSearchPage() throws Exception {
