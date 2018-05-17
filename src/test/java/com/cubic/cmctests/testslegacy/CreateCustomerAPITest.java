@@ -52,48 +52,47 @@ public class CreateCustomerAPITest extends RESTEngine {
 
 	    String testCaseName = "185943: createNewCustomerApi";
 	    
-	    try{
-	        restActions = setupAutomationTest(context, testCaseName);
-	        restActions.successReport("test", "test");
-	 
-		// Create customer test data via api rest call
-	    Log.info("185943");
-		cData = ApiCustomerPost.apiPostSuccess();
-		email = cData.getEmail();
-		phoneNumber = cData.getPhone();
-		phoneNumber = "(" + phoneNumber.substring(0, 3) + ") " + phoneNumber.substring(3, 6) + "-" + phoneNumber.substring(6, 10);
-		Log.info("Email and phone number from API:  " + email + " " + phoneNumber);
+	    try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
 
-		// return to selenium testing 
-		coreTest.signIn(driver);
-		SearchPage sPage = getSearchPage();
-		sPage.selectSearchTypeCustomer(driver);
-		sPage.clickCustomerType(driver, "Traveler");
-		sPage.enterEmail(driver, email);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 175)", "");
-		Utils.waitTime(30000);
-		sPage.clickSearch(driver);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
-		Utils.waitTime(5000);
-		sPage.clickRecord(driver);
-		sPage.clickSecurityBox(driver);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 175)", "");
-		sPage.clickContiune(driver);
-		Utils.waitTime(5000);
-		
+			// Create customer test data via api rest call
+			Log.info("185943");
+			cData = ApiCustomerPost.apiPostSuccess();
+			email = cData.getEmail();
+			phoneNumber = cData.getPhone();
+			phoneNumber = "(" + phoneNumber.substring(0, 3) + ") " + phoneNumber.substring(3, 6) + "-" + phoneNumber.substring(6, 10);
+			Log.info("Email and phone number from API:  " + email + " " + phoneNumber);
 
-		// Verify customer data on cmc UI
-		NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
-		Assert.assertEquals(nPage3.getFname(driver), cData.getFname());
-		Assert.assertEquals(nPage3.getLname(driver), cData.getLname());
-		Assert.assertEquals(nPage3.getEmail(driver), email);
-		Assert.assertEquals(nPage3.getPhone(driver), phoneNumber);
-		Assert.assertEquals(nPage3.getAddress(driver).substring(0, 12), cData.getAddress());
-		
-		driver.close();
-		
-	    }
-	    catch (Exception e) {
+			// return to selenium testing
+			coreTest.signIn(driver);
+			SearchPage sPage = getSearchPage();
+			sPage.selectSearchTypeCustomer(driver);
+			sPage.clickCustomerType(driver, "Traveler");
+			sPage.enterEmail(driver, email);
+			((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 175)", "");
+			Utils.waitTime(30000);
+			sPage.clickSearch(driver);
+			((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
+			Utils.waitTime(5000);
+			sPage.clickRecord(driver);
+			sPage.clickSecurityBox(driver);
+			((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 175)", "");
+			sPage.clickContiune(driver);
+			Utils.waitTime(5000);
+
+
+			// Verify customer data on cmc UI
+			NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
+			Assert.assertEquals(nPage3.getFname(driver), cData.getFname());
+			Assert.assertEquals(nPage3.getLname(driver), cData.getLname());
+			Assert.assertEquals(nPage3.getEmail(driver), email);
+			Assert.assertEquals(nPage3.getPhone(driver), phoneNumber);
+			Assert.assertEquals(nPage3.getAddress(driver).substring(0, 12), cData.getAddress());
+
+			driver.close();
+
+		} catch (Exception e) {
             e.printStackTrace();
             restActions.failureReport("Exception caught in catch block", "Exception is: " + e);
             throw new RuntimeException(e);
