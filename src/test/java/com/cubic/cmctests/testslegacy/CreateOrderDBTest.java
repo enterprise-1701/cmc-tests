@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.cubic.accelerators.RESTActions;
 import com.cubic.accelerators.RESTEngine;
+import com.cubic.cmcjava.constants.AppConstants;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -124,46 +125,56 @@ public class CreateOrderDBTest extends RESTEngine {
 	// TODO: Find a test case number for this
 	@Test(priority = 2, enabled = true)
 	public void createOrderCancelDBcheck(ITestContext context) throws Exception {
-		
-	    Log.info("");
-		createNewCustomer(driver);
-		NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
-		Utils.waitTime(5000);
-		nPage3.clickFundingSource(driver);
-		CreateFundingPage cPage = new CreateFundingPage(driver);
-		cPage.selectPaymentType(driver, PAYMENT_TYPE);
-		cPage.enterName(driver, Global.CCNAME);
-		cPage.enterCC(driver, Global.CC);
-		cPage.selectMonth(driver);
-		cPage.selectYear(driver);
-		cPage.clickSubmit(driver);
-		Utils.waitTime(5000);
-		cPage.clickCreateOrder(driver);
-		CreateOrderPage oPage = new CreateOrderPage(driver);
-		oPage.selectOrderType(driver);
-		oPage.selectPurseType(driver);
-		oPage.selectOrderAmount(driver);
-		oPage.clickCancel(driver);
+		String testCaseName = "815092:createOrderCancelDBcheck";
 
-		Log.info("checking the database now");
-		Utils.waitTime(10000);
-		DBAutomation dbAuto = new DBAutomation();
-		dbAuto.dbCmsConnect();
-		Log.info("Cms connected");
-		int customerID = dbAuto.dbFindCustomerId(email);
-		Log.info("customer id found in db: " + customerID);
-		dbAuto.dbDisconnect();
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("815092");
+			createNewCustomer(driver);
+			NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
+			Utils.waitTime(5000);
+			nPage3.clickFundingSource(driver);
+			CreateFundingPage cPage = new CreateFundingPage(driver);
+			cPage.selectPaymentType(driver, PAYMENT_TYPE);
+			cPage.enterName(driver, Global.CCNAME);
+			cPage.enterCC(driver, Global.CC);
+			cPage.selectMonth(driver);
+			cPage.selectYear(driver);
+			cPage.clickSubmit(driver);
+			Utils.waitTime(5000);
+			cPage.clickCreateOrder(driver);
+			CreateOrderPage oPage = new CreateOrderPage(driver);
+			oPage.selectOrderType(driver);
+			oPage.selectPurseType(driver);
+			oPage.selectOrderAmount(driver);
+			oPage.clickCancel(driver);
 
-		DBAutomation dbAuto2 = new DBAutomation();
-		dbAuto2.dbOamConnect();
-		Log.info("Oam connected");
-		orderRecordFound = dbAuto2.dbFindJournalEntry(customerID);
-		dbAuto2.dbDisconnectOAM();
+			Log.info("checking the database now");
+			Utils.waitTime(10000);
+			DBAutomation dbAuto = new DBAutomation();
+			dbAuto.dbCmsConnect();
+			Log.info("Cms connected");
+			int customerID = dbAuto.dbFindCustomerId(email);
+			Log.info("customer id found in db: " + customerID);
+			dbAuto.dbDisconnect();
 
-		Assert.assertFalse(orderRecordFound, "error - order record was found for a canceled order");
-		driver.close();
-		Log.info("createOrderDBcheck Completed");
+			DBAutomation dbAuto2 = new DBAutomation();
+			dbAuto2.dbOamConnect();
+			Log.info("Oam connected");
+			orderRecordFound = dbAuto2.dbFindJournalEntry(customerID);
+			dbAuto2.dbDisconnectOAM();
 
+			Assert.assertFalse(orderRecordFound, "error - order record was found for a canceled order");
+			driver.close();
+			Log.info("createOrderCancelDBcheck Completed");
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 	
 	private WebDriver createNewCustomer(WebDriver driver) throws Exception {
@@ -178,7 +189,7 @@ public class CreateOrderDBTest extends RESTEngine {
 		coreTest.signIn(driver);
 		SearchPage sPage = getSearchPage();
 		sPage.selectSearchTypeCustomer(driver);
-		sPage.clickCustomerType(driver, "Individual");
+		sPage.clickCustomerType(driver, Global.CUSTOMERTYPE);
 		sPage.enterEmail(driver, email);
 		sPage.clickSearch(driver);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");

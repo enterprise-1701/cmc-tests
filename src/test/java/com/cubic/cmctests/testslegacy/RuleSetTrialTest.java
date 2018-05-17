@@ -45,11 +45,12 @@ public class RuleSetTrialTest extends RESTEngine {
 	// TODO: Need a test case number
 	@Test(priority = 1, enabled = true)
 	public void createRuleSetTrial(ITestContext context) throws Exception {
-		String testCaseName = ":createRuleSetTrial";
+		String testCaseName = "161529:createRuleSetTrial";
 
 		try {
 			restActions = setupAutomationTest(context, testCaseName);
 			restActions.successReport("test", "test");
+			Log.info("161529");
 			coreTest.signIn(driver);
 
 			FinancePage finPage = getFinancePage();

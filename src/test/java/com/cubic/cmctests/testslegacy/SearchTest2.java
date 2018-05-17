@@ -209,12 +209,12 @@ public class SearchTest2 extends RESTEngine {
 	// Test new search button on upper right of screen
 	@Test(priority = 13, enabled = true)
 	public void searchNewSearchButton(ITestContext context) throws Exception {
-		String testCaseName = ":searchNewSearchButton";
+		String testCaseName = "815096:searchNewSearchButton";
 
 		try {
 			restActions = setupAutomationTest(context, testCaseName);
 			restActions.successReport("test", "test");
-			Log.info("");
+			Log.info("815096");
 			coreTest.signIn(driver);
 			SearchPage sPage = getSearchPage();
 			sPage.selectSearchTypeCustomer(driver);

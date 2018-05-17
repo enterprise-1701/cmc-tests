@@ -107,12 +107,12 @@ public class CreateOrderTest extends RESTEngine {
 	// TODO: Find a test case number for this
 	@Test(priority = 2, enabled = true)
 	public void createOrderCancel(ITestContext context) throws Exception {
-		String testCaseName = ":createOrderCancel";
+		String testCaseName = "815094:createOrderCancel";
 
 		try {
 			restActions = setupAutomationTest(context, testCaseName);
 			restActions.successReport("test", "test");
-			Log.info("");
+			Log.info("815094");
 			createNewCustomer(driver);
 			NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
 			Utils.waitTime(5000);
