@@ -53,7 +53,8 @@ public class CreateCustomerAPITest extends RESTEngine {
 	    String testCaseName = "185943: createNewCustomerApi";
 	    
 	    try{
-	        
+	        restActions = setupAutomationTest(context, testCaseName);
+	        restActions.successReport("test", "test");
 	 
 		// Create customer test data via api rest call
 	    Log.info("185943");
