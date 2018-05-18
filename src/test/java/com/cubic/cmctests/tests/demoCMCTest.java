@@ -41,7 +41,7 @@ public class demoCMCTest extends WebDriverEngine {
             if (data.get(GenericConstants.RUN_MODE).equals(GenericConstants.RUN_MODE_YES)) {
                 commonLib.navigateToBaseURLAndLogin();
                 action.assertTrue(action.waitForVisibilityOfElement(LaunchPadPage.WelcomeHeader, "Dashboard page welcome header"), "The user has successfully logged in");
-                keyCloakLib.logOutIfLoggedIn();
+                keyCloakLib.logOutifLoggedIn();
             }
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -100,7 +100,7 @@ public class demoCMCTest extends WebDriverEngine {
                 }
                 if(emailFound) action.successReport("Subject Validation", "Email with valid subject found");
                 else action.failureReport("Subject Validation", "No email with valid subject found");
-                keyCloakLib.logOutIfLoggedIn();
+                keyCloakLib.logOutifLoggedIn();
             }
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -130,7 +130,7 @@ public class demoCMCTest extends WebDriverEngine {
                 CustomerDetailsLib contactDetailsLib = searchLib.acceptSecurityAndContinue().expandActivityHistory();
 
                 action.assertTrue(contactDetailsLib.isActivityHistoryVisible(), "Activity History Table");
-                keyCloakLib.logOutIfLoggedIn();
+                keyCloakLib.logOutifLoggedIn();
             }
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -173,7 +173,7 @@ public class demoCMCTest extends WebDriverEngine {
 
                 action.assertTextStringMatching(fromDate, weekAgo);
                 action.assertTextStringMatching(toDate, today);
-                keyCloakLib.logOutIfLoggedIn();
+                keyCloakLib.logOutifLoggedIn();
             }
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -214,7 +214,7 @@ public class demoCMCTest extends WebDriverEngine {
                         .expandTravelHistory();
 
                 action.assertTextStringMatching(detailsLib.getTravelHistoryRowCount(), data.get("EXPECTED"));
-                keyCloakLib.logOutIfLoggedIn();
+                keyCloakLib.logOutifLoggedIn();
             }
         } catch (RuntimeException e) {
             e.printStackTrace();
