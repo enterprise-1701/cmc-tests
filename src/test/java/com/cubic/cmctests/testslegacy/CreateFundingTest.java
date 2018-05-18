@@ -623,7 +623,7 @@ public class CreateFundingTest extends RESTEngine {
 		coreTest.signIn(driver);
 		SearchPage sPage = getSearchPage();
 		sPage.selectSearchTypeCustomer(driver);
-		sPage.clickCustomerType(driver, "Individual");
+		sPage.clickCustomerType(driver, Global.CUSTOMERTYPE);
 		sPage.enterEmail(driver, email);
 		sPage.clickSearch(driver);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
