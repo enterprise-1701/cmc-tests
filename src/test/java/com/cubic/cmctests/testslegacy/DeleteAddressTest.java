@@ -1,11 +1,15 @@
 package com.cubic.cmctests.testslegacy;
 
 import java.util.concurrent.TimeUnit;
+
+import com.cubic.accelerators.RESTActions;
+import com.cubic.accelerators.RESTEngine;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.os.WindowsUtils;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -20,7 +24,7 @@ import com.cubic.cmcjava.utils.*;
 //
 //#################################################################################
 
-public class DeleteAddressTest {
+public class DeleteAddressTest extends RESTEngine{
 
 	private static String phoneNumber;
 	private static String email;
@@ -29,6 +33,7 @@ public class DeleteAddressTest {
 	static WebDriver driver;
 	static String browser;
 	CoreTest coreTest = new CoreTest();
+	RESTActions restActions;
 
 	@Parameters("browser")
 	@BeforeMethod
@@ -45,42 +50,62 @@ public class DeleteAddressTest {
 	}
 
 	@Test(priority = 1, enabled = true)
-	public void deleteAddressCancel() throws Exception {
+	public void deleteAddressCancel(ITestContext context) throws Exception {
+		String testCaseName = "29931:deleteAddressCancel";
 
-	    Log.info("29931");
-		createNewCustomer(driver);
-		Utils.waitTime(5000);
-		SearchPage sPage = new SearchPage(driver);
-		sPage.clickExpandAddress(driver);
-		Utils.waitTime(5000);
-		sPage.clickDeleteAddress(driver);
-		DeleteAddressDetailsPage delPage = new DeleteAddressDetailsPage(driver);
-		Utils.waitTime(5000);
-		delPage.clickCancel(driver);
-		Utils.waitTime(5000);
-		Assert.assertTrue(sPage.isDeleteAddressDisplayed(driver));
-		driver.close();
-
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29931");
+			createNewCustomer(driver);
+			Utils.waitTime(5000);
+			SearchPage sPage = new SearchPage(driver);
+			sPage.clickExpandAddress(driver);
+			Utils.waitTime(5000);
+			sPage.clickDeleteAddress(driver);
+			DeleteAddressDetailsPage delPage = new DeleteAddressDetailsPage(driver);
+			Utils.waitTime(5000);
+			delPage.clickCancel(driver);
+			Utils.waitTime(5000);
+			Assert.assertTrue(sPage.isDeleteAddressDisplayed(driver));
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 	
 	@Test(priority = 2, enabled = true)
-	public void deleteAddressConfirmCancel() throws Exception {
+	public void deleteAddressConfirmCancel(ITestContext context) throws Exception {
+		String testCaseName = "29934:deleteAddressConfirmCancel";
 
-	    Log.info("29934");
-		createNewCustomer(driver);
-		Utils.waitTime(5000);
-		SearchPage sPage = new SearchPage(driver);
-		sPage.clickExpandAddress(driver);
-		Utils.waitTime(5000);
-		sPage.clickDeleteAddress(driver);
-		DeleteAddressDetailsPage delPage = new DeleteAddressDetailsPage(driver);
-		delPage.clickConfirmDelete(driver);
-		Utils.waitTime(5000);
-		delPage.clickSecondCancel(driver);
-		Utils.waitTime(5000);
-		Assert.assertTrue(sPage.isDeleteAddressDisplayed(driver));
-		driver.close();
-
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29934");
+			createNewCustomer(driver);
+			Utils.waitTime(5000);
+			SearchPage sPage = new SearchPage(driver);
+			sPage.clickExpandAddress(driver);
+			Utils.waitTime(5000);
+			sPage.clickDeleteAddress(driver);
+			DeleteAddressDetailsPage delPage = new DeleteAddressDetailsPage(driver);
+			delPage.clickConfirmDelete(driver);
+			Utils.waitTime(5000);
+			delPage.clickSecondCancel(driver);
+			Utils.waitTime(5000);
+			Assert.assertTrue(sPage.isDeleteAddressDisplayed(driver));
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
 	private WebDriver createNewCustomer(WebDriver driver) throws Exception {

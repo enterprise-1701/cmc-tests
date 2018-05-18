@@ -9,7 +9,7 @@
 		<parameter name="chromeDownloadDirPath" value="c:\temp\"/>
 
 		<classes>
-            <class name="com.cubic.cmcjava.tests.script.ViewTravelHistoryTest"/>
+			<class name="com.cubic.cmctests.testslegacy.CreateCustomerAPITest"/>
 		</classes>
 	</test>
 </suite>

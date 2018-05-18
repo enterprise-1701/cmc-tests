@@ -8,16 +8,18 @@
     <parameter name="version" value=""></parameter>
     <parameter name="platform" value=""></parameter>
 	<parameter name="chromeDownloadDirPath" value="c:\temp\"></parameter>
-     
     <parameter name="projectID" value="35"></parameter>
     <parameter name="suiteID" value="549"></parameter>
 
 	<test name="CMCTests - Chrome">
 		<parameter name="browser" value="saucelabs"/>
-		<classes>
-		<class name="com.cubic.cmctests.testslegacy.TestScript_Driver" />
-		<class name="com.cubic.cmctests.testslegacy.CreateCustomerAPITest"/>
-		</classes>
+		<!--<classes>-->
+			<!--<class name="com.cubic.cmctests.testslegacy.TestScript_Driver" />-->
+			<!--<class name="com.cubic.cmctests.testslegacy.CreateCustomerAPITest"/>-->
+		<!--</classes>-->
+		<packages>
+			<package name="com.cubic.cmctests.testslegacy"/>
+		</packages>
 	</test>
 	<listeners>
 		<listener class-name="org.uncommons.reportng.HTMLReporter" />

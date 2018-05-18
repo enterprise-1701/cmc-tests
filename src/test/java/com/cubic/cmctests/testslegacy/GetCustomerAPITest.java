@@ -1,6 +1,9 @@
 package com.cubic.cmctests.testslegacy;
 
 import java.util.concurrent.TimeUnit;
+
+import com.cubic.accelerators.RESTActions;
+import com.cubic.accelerators.RESTEngine;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.os.WindowsUtils;
@@ -14,7 +17,7 @@ import com.cubic.cmcjava.restapi.ApiCustomerGet;
 import com.cubic.cmcjava.utils.*;
 
 //#################################################################################
-// Quality Center Test IDs: 71940
+// 
 //#################################################################################
 
 public class GetCustomerAPITest {
@@ -40,6 +43,7 @@ public class GetCustomerAPITest {
 		Log.info("Setup Completed");
 	}
 
+	// TODO: Find out if I should bother with this one
 	@Test(priority = 1, enabled = true)
 	public void getCustomerApi() throws Exception {
 

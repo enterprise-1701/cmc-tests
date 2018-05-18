@@ -34,7 +34,8 @@ public class DBTest {
 		 
 	}
 	*/
-	
+
+	// TODO: Find out if I should bother with this one
 	@Test(enabled = true)
 	public void checkDB() throws Exception {
 
