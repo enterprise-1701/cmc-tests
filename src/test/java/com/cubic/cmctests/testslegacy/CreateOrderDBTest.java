@@ -1,11 +1,16 @@
 package com.cubic.cmctests.testslegacy;
 
 import java.util.concurrent.TimeUnit;
+
+import com.cubic.accelerators.RESTActions;
+import com.cubic.accelerators.RESTEngine;
+import com.cubic.cmcjava.constants.AppConstants;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.os.WindowsUtils;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -26,7 +31,7 @@ import com.cubic.cmcjava.utils.*;
 //Quality Center Test IDs: 77611, 77612
 //#################################################################################
 
-public class CreateOrderDBTest {
+public class CreateOrderDBTest extends RESTEngine {
 
 	private static Logger Log = Logger.getLogger(Logger.class.getName());
 	private static String email;
@@ -37,7 +42,7 @@ public class CreateOrderDBTest {
 	private static CustomerData cData;
 	private static String phoneNumber;
 	private static final Integer PAYMENT_TYPE = 1;
-
+	RESTActions restActions;
 
 	@Parameters("browser")
 	@BeforeMethod
@@ -54,101 +59,122 @@ public class CreateOrderDBTest {
 	}
 
 	@Test(priority = 1, enabled = true)
-	public void createOrderDBcheck() throws Exception {
-	    
-	    Log.info("185963");
-		createNewCustomer(driver);
-		// create order using UI
-		NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
-		Utils.waitTime(5000);
-		nPage3.clickFundingSource(driver);
-		CreateFundingPage cPage = new CreateFundingPage(driver);
-		cPage.selectPaymentType(driver, PAYMENT_TYPE);
-		cPage.enterName(driver, Global.CCNAME);
-		cPage.enterCC(driver, Global.CC);
-		cPage.selectMonth(driver);
-		cPage.selectYear(driver);
-		cPage.clickSubmit(driver);
-		Utils.waitTime(3000);
-		
-		cPage.clickCreateOrder(driver);
-		CreateOrderPage oPage = new CreateOrderPage(driver);
-		oPage.selectOrderType(driver);
-		oPage.selectPurseType(driver);
-		oPage.selectOrderAmount(driver);
-		oPage.clickAddtoCart(driver);
-		Utils.waitTime(10000);
-		
-		nPage3.clickCart(driver);
-		ShoppingCartPage sPage = new ShoppingCartPage(driver);
-		sPage.clickCheckOut(driver);
-		Utils.waitTime(5000);
-		sPage.clickPlaceOrder(driver);
-		Utils.waitTime(5000);
+	public void createOrderDBcheck(ITestContext context) throws Exception {
+	    String testCaseName = "185963:createOrderDBcheck";
 
-		Log.info("checking the database now");
-		Utils.waitTime(10000);
-		DBAutomation dbAuto = new DBAutomation();
-		dbAuto.dbCmsConnect();
-		Log.info("Cms connected");
-		int customerID = dbAuto.dbFindCustomerId(email);
-		Log.info("customer id found in db: " + customerID);
-		dbAuto.dbDisconnect();
+	    try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("185963");
+			createNewCustomer(driver);
+			// create order using UI
+			NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
+			Utils.waitTime(5000);
+			nPage3.clickFundingSource(driver);
+			CreateFundingPage cPage = new CreateFundingPage(driver);
+			cPage.selectPaymentType(driver, PAYMENT_TYPE);
+			cPage.enterName(driver, Global.CCNAME);
+			cPage.enterCC(driver, Global.CC);
+			cPage.selectMonth(driver);
+			cPage.selectYear(driver);
+			cPage.clickSubmit(driver);
+			Utils.waitTime(3000);
 
-		DBAutomation dbAuto2 = new DBAutomation();
-		dbAuto2.dbOamConnect();
-		Log.info("Oam connected");
-		orderRecordFound = dbAuto2.dbFindJournalEntry(customerID);
-		dbAuto2.dbDisconnectOAM();
+			cPage.clickCreateOrder(driver);
+			CreateOrderPage oPage = new CreateOrderPage(driver);
+			oPage.selectOrderType(driver);
+			oPage.selectPurseType(driver);
+			oPage.selectOrderAmount(driver);
+			oPage.clickAddtoCart(driver);
+			Utils.waitTime(10000);
 
-		Assert.assertTrue(orderRecordFound, "error - order record was not found in the database");
-		driver.close();
-		Log.info("createOrderDBcheck Completed");
+			nPage3.clickCart(driver);
+			ShoppingCartPage sPage = new ShoppingCartPage(driver);
+			sPage.clickCheckOut(driver);
+			Utils.waitTime(5000);
+			sPage.clickPlaceOrder(driver);
+			Utils.waitTime(5000);
 
+			Log.info("checking the database now");
+			Utils.waitTime(10000);
+			DBAutomation dbAuto = new DBAutomation();
+			dbAuto.dbCmsConnect();
+			Log.info("Cms connected");
+			int customerID = dbAuto.dbFindCustomerId(email);
+			Log.info("customer id found in db: " + customerID);
+			dbAuto.dbDisconnect();
+
+			DBAutomation dbAuto2 = new DBAutomation();
+			dbAuto2.dbOamConnect();
+			Log.info("Oam connected");
+			orderRecordFound = dbAuto2.dbFindJournalEntry(customerID);
+			dbAuto2.dbDisconnectOAM();
+
+			Assert.assertTrue(orderRecordFound, "error - order record was not found in the database");
+			driver.close();
+			Log.info("createOrderDBcheck Completed");
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
+	// TODO: Find a test case number for this
 	@Test(priority = 2, enabled = true)
-	public void createOrderCancelDBcheck() throws Exception {
-		
-	    Log.info("");
-		createNewCustomer(driver);
-		NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
-		Utils.waitTime(5000);
-		nPage3.clickFundingSource(driver);
-		CreateFundingPage cPage = new CreateFundingPage(driver);
-		cPage.selectPaymentType(driver, PAYMENT_TYPE);
-		cPage.enterName(driver, Global.CCNAME);
-		cPage.enterCC(driver, Global.CC);
-		cPage.selectMonth(driver);
-		cPage.selectYear(driver);
-		cPage.clickSubmit(driver);
-		Utils.waitTime(5000);
-		cPage.clickCreateOrder(driver);
-		CreateOrderPage oPage = new CreateOrderPage(driver);
-		oPage.selectOrderType(driver);
-		oPage.selectPurseType(driver);
-		oPage.selectOrderAmount(driver);
-		oPage.clickCancel(driver);
+	public void createOrderCancelDBcheck(ITestContext context) throws Exception {
+		String testCaseName = "815092:createOrderCancelDBcheck";
 
-		Log.info("checking the database now");
-		Utils.waitTime(10000);
-		DBAutomation dbAuto = new DBAutomation();
-		dbAuto.dbCmsConnect();
-		Log.info("Cms connected");
-		int customerID = dbAuto.dbFindCustomerId(email);
-		Log.info("customer id found in db: " + customerID);
-		dbAuto.dbDisconnect();
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("815092");
+			createNewCustomer(driver);
+			NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
+			Utils.waitTime(5000);
+			nPage3.clickFundingSource(driver);
+			CreateFundingPage cPage = new CreateFundingPage(driver);
+			cPage.selectPaymentType(driver, PAYMENT_TYPE);
+			cPage.enterName(driver, Global.CCNAME);
+			cPage.enterCC(driver, Global.CC);
+			cPage.selectMonth(driver);
+			cPage.selectYear(driver);
+			cPage.clickSubmit(driver);
+			Utils.waitTime(5000);
+			cPage.clickCreateOrder(driver);
+			CreateOrderPage oPage = new CreateOrderPage(driver);
+			oPage.selectOrderType(driver);
+			oPage.selectPurseType(driver);
+			oPage.selectOrderAmount(driver);
+			oPage.clickCancel(driver);
 
-		DBAutomation dbAuto2 = new DBAutomation();
-		dbAuto2.dbOamConnect();
-		Log.info("Oam connected");
-		orderRecordFound = dbAuto2.dbFindJournalEntry(customerID);
-		dbAuto2.dbDisconnectOAM();
+			Log.info("checking the database now");
+			Utils.waitTime(10000);
+			DBAutomation dbAuto = new DBAutomation();
+			dbAuto.dbCmsConnect();
+			Log.info("Cms connected");
+			int customerID = dbAuto.dbFindCustomerId(email);
+			Log.info("customer id found in db: " + customerID);
+			dbAuto.dbDisconnect();
 
-		Assert.assertFalse(orderRecordFound, "error - order record was found for a canceled order");
-		driver.close();
-		Log.info("createOrderDBcheck Completed");
+			DBAutomation dbAuto2 = new DBAutomation();
+			dbAuto2.dbOamConnect();
+			Log.info("Oam connected");
+			orderRecordFound = dbAuto2.dbFindJournalEntry(customerID);
+			dbAuto2.dbDisconnectOAM();
 
+			Assert.assertFalse(orderRecordFound, "error - order record was found for a canceled order");
+			driver.close();
+			Log.info("createOrderCancelDBcheck Completed");
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 	
 	private WebDriver createNewCustomer(WebDriver driver) throws Exception {
@@ -163,7 +189,7 @@ public class CreateOrderDBTest {
 		coreTest.signIn(driver);
 		SearchPage sPage = getSearchPage();
 		sPage.selectSearchTypeCustomer(driver);
-		sPage.clickCustomerType(driver, "Individual");
+		sPage.clickCustomerType(driver, Global.CUSTOMERTYPE);
 		sPage.enterEmail(driver, email);
 		sPage.clickSearch(driver);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");

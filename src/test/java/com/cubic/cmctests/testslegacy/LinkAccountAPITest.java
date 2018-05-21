@@ -1,11 +1,15 @@
 package com.cubic.cmctests.testslegacy;
 
 import java.util.concurrent.TimeUnit;
+
+import com.cubic.accelerators.RESTActions;
+import com.cubic.accelerators.RESTEngine;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.os.WindowsUtils;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -21,7 +25,7 @@ import com.cubic.cmcjava.utils.*;
 //#################################################################################
 // 
 
-public class LinkAccountAPITest {
+public class LinkAccountAPITest extends RESTEngine {
 
 	private static Logger Log = Logger.getLogger(Logger.class.getName());
 	private static final String ACCTLINKED_ERROR = "Account Already Linked";
@@ -31,6 +35,7 @@ public class LinkAccountAPITest {
 	private static String phoneNumber;
 	private static String email;
 	private static CustomerData cData;
+	RESTActions restActions;
 
 	CoreTest coreTest = new CoreTest();
 	AccountData acctData = new AccountData();
@@ -50,218 +55,289 @@ public class LinkAccountAPITest {
 	}
 
 	@Test(priority = 1, enabled = true)
-	public void linkAccountTest() throws Exception {
+	public void linkAccountTest(ITestContext context) throws Exception {
+		String testCaseName = "29944:linkAccountTest";
 
-	    Log.info("29944");
-		// create balance via soap call
-		SOAPClientSAAJ sClient = new SOAPClientSAAJ();
-		CreditCardNumberGenerator ccGenerator = new CreditCardNumberGenerator();
-		String validCCNumber = ccGenerator.generate("4", 16);
-		String accountID = sClient.createABPAccountSOAPCall(validCCNumber);
-		Log.info("cc number being used is " + validCCNumber);
-		Log.info("account id being returned is " + accountID);
-		Log.info("waiting for ABP to get updated");
-		Utils.waitTime(120000);
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29944");
+			// create balance via soap call
+			SOAPClientSAAJ sClient = new SOAPClientSAAJ();
+			CreditCardNumberGenerator ccGenerator = new CreditCardNumberGenerator();
+			String validCCNumber = ccGenerator.generate("4", 16);
+			String accountID = sClient.createABPAccountSOAPCall(validCCNumber);
+			Log.info("cc number being used is " + validCCNumber);
+			Log.info("account id being returned is " + accountID);
+			Log.info("waiting for ABP to get updated");
+			Utils.waitTime(120000);
 
-		// create account and link it to cc
-		//coreTest.signIn(driver);
-		//coreTest.createCustomer(driver);
-		createNewCustomer(driver);
-		
-		BasePage bPage = new BasePage(driver);
-		Utils.waitTime(5000);
-		bPage.clickLinkAccount(driver);
-		LinkAccountPage lPage = new LinkAccountPage(driver);
+			// create account and link it to cc
+			//coreTest.signIn(driver);
+			//coreTest.createCustomer(driver);
+			createNewCustomer(driver);
 
-		// use cc number from soap call to link account
-		lPage.enterBankAccount(driver, validCCNumber);
-		lPage.selectExpMonth(driver);
-		lPage.selectExpYear(driver, 2);
-		lPage.clickSearchToken(driver);
-		lPage.enterNickName(driver, "adam");
-		lPage.clickRegisterAndLink(driver);
-        Utils.waitTime(10000);
-		Log.info(lPage.getAccountNo(driver));
-		Assert.assertTrue(lPage.isAccountDisplayed(driver));
+			BasePage bPage = new BasePage(driver);
+			Utils.waitTime(5000);
+			bPage.clickLinkAccount(driver);
+			LinkAccountPage lPage = new LinkAccountPage(driver);
 
+			// use cc number from soap call to link account
+			lPage.enterBankAccount(driver, validCCNumber);
+			lPage.selectExpMonth(driver);
+			lPage.selectExpYear(driver, 2);
+			lPage.clickSearchToken(driver);
+			lPage.enterNickName(driver, "adam");
+			lPage.clickRegisterAndLink(driver);
+			Utils.waitTime(10000);
+			Log.info(lPage.getAccountNo(driver));
+			Assert.assertTrue(lPage.isAccountDisplayed(driver));
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
 	@Test(priority = 2, enabled = true)
-	public void linkAccountAlreadyLinkedTest() throws Exception {
+	public void linkAccountAlreadyLinkedTest(ITestContext context) throws Exception {
+		String testCaseName = "29946:linkAccountAlreadyLinkedTest";
 
-	    Log.info("29946");
-		// create balance via soap call
-		SOAPClientSAAJ sClient = new SOAPClientSAAJ();
-		CreditCardNumberGenerator ccGenerator = new CreditCardNumberGenerator();
-		String validCCNumber = ccGenerator.generate("4", 16);
-		String accountID = sClient.createABPAccountSOAPCall(validCCNumber);
-		Log.info("cc number being used is " + validCCNumber);
-		Log.info("account id being returned is " + accountID);
-		Log.info("waiting for ABP to get updated");
-		Utils.waitTime(120000);
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29946");
+			// create balance via soap call
+			SOAPClientSAAJ sClient = new SOAPClientSAAJ();
+			CreditCardNumberGenerator ccGenerator = new CreditCardNumberGenerator();
+			String validCCNumber = ccGenerator.generate("4", 16);
+			String accountID = sClient.createABPAccountSOAPCall(validCCNumber);
+			Log.info("cc number being used is " + validCCNumber);
+			Log.info("account id being returned is " + accountID);
+			Log.info("waiting for ABP to get updated");
+			Utils.waitTime(120000);
 
-		// create account and link it to cc
-		coreTest.signIn(driver);
-		coreTest.createCustomer(driver);
-	
-		BasePage bPage = new BasePage(driver);
-		bPage.clickLinkAccount(driver);
-		LinkAccountPage lPage = new LinkAccountPage(driver);
+			// create account and link it to cc
+			coreTest.signIn(driver);
+			coreTest.createCustomer(driver);
 
-		// use cc number from soap call to link account
-		lPage.enterBankAccount(driver, validCCNumber);
-		lPage.selectExpMonth(driver);
-		lPage.selectExpYear(driver, 2);
-		lPage.clickSearchToken(driver);
-		lPage.enterNickName(driver, "adam");
-		lPage.clickRegisterAndLink(driver);
+			BasePage bPage = new BasePage(driver);
+			bPage.clickLinkAccount(driver);
+			LinkAccountPage lPage = new LinkAccountPage(driver);
 
-		// create a second customer
-		bPage.clickHome(driver);
-		bPage.clickNewCustomer(driver);
-		coreTest.createCustomer(driver);
+			// use cc number from soap call to link account
+			lPage.enterBankAccount(driver, validCCNumber);
+			lPage.selectExpMonth(driver);
+			lPage.selectExpYear(driver, 2);
+			lPage.clickSearchToken(driver);
+			lPage.enterNickName(driver, "adam");
+			lPage.clickRegisterAndLink(driver);
 
-		// attempt to link the second customer to the saved CC number which
-		// is already linked to the first customer
-		bPage.clickLinkAccount(driver);
-		lPage.enterBankAccount(driver, validCCNumber);
-		lPage.selectExpMonth(driver);
-		lPage.selectExpYear(driver, 2);
-		lPage.clickSearchToken(driver);
-		Assert.assertEquals(lPage.getAlreadyLinkedError(driver), ACCTLINKED_ERROR);
-		Assert.assertTrue(lPage.isViewLinkDisplayed(driver));
-		lPage.clickView(driver);
-		driver.close();
+			// create a second customer
+			bPage.clickHome(driver);
+			bPage.clickNewCustomer(driver);
+			coreTest.createCustomer(driver);
 
+			// attempt to link the second customer to the saved CC number which
+			// is already linked to the first customer
+			bPage.clickLinkAccount(driver);
+			lPage.enterBankAccount(driver, validCCNumber);
+			lPage.selectExpMonth(driver);
+			lPage.selectExpYear(driver, 2);
+			lPage.clickSearchToken(driver);
+			Assert.assertEquals(lPage.getAlreadyLinkedError(driver), ACCTLINKED_ERROR);
+			Assert.assertTrue(lPage.isViewLinkDisplayed(driver));
+			lPage.clickView(driver);
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
 	@Test(priority = 3, enabled = true)
-	public void linkAccountFailureTest() throws Exception {
+	public void linkAccountFailureTest(ITestContext context) throws Exception {
+		String testCaseName = "29943:linkAccountFailureTest";
 
-	    Log.info("29943");
-		createNewCustomer(driver);
-		BasePage bPage = new BasePage(driver);
-		bPage.clickLinkAccount(driver);
-		LinkAccountPage lPage = new LinkAccountPage(driver);
-		lPage.enterBankAccount(driver, Global.INVALID_CC);
-		lPage.selectExpMonth(driver);
-		lPage.selectExpYear(driver, 2);
-		lPage.clickSearchToken(driver);
-		Assert.assertEquals(lPage.getLinkFailureDisplayed(driver), LINK_FAILURE);
-		Log.info("linkAccountFailurelTest Completed");
-		driver.close();
-
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29943");
+			createNewCustomer(driver);
+			BasePage bPage = new BasePage(driver);
+			bPage.clickLinkAccount(driver);
+			LinkAccountPage lPage = new LinkAccountPage(driver);
+			lPage.enterBankAccount(driver, Global.INVALID_CC);
+			lPage.selectExpMonth(driver);
+			lPage.selectExpYear(driver, 2);
+			lPage.clickSearchToken(driver);
+			Assert.assertEquals(lPage.getLinkFailureDisplayed(driver), LINK_FAILURE);
+			Log.info("linkAccountFailurelTest Completed");
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
 	@Test(priority = 4, enabled = true)
-	public void linkAccountCancelTest() throws Exception {
+	public void linkAccountCancelTest(ITestContext context) throws Exception {
+		String testCaseName = "29941:linkAccountCancelTest";
 
-	    Log.info("29941");
-		createNewCustomer(driver);
-		BasePage bPage = new BasePage(driver);
-		bPage.clickLinkAccount(driver);
-		LinkAccountPage lPage = new LinkAccountPage(driver);
-		lPage.enterBankAccount(driver, Global.CC);
-		lPage.selectExpMonth(driver);
-		lPage.selectExpYear(driver, 2);
-		lPage.clickCancel(driver);
-		Assert.assertTrue(lPage.isLinkAccountDisplayed(driver));
-		Log.info("linkAccountCancelTest Completed");
-		driver.close();
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29941");
+			createNewCustomer(driver);
+			BasePage bPage = new BasePage(driver);
+			bPage.clickLinkAccount(driver);
+			LinkAccountPage lPage = new LinkAccountPage(driver);
+			lPage.enterBankAccount(driver, Global.CC);
+			lPage.selectExpMonth(driver);
+			lPage.selectExpYear(driver, 2);
+			lPage.clickCancel(driver);
+			Assert.assertTrue(lPage.isLinkAccountDisplayed(driver));
+			Log.info("linkAccountCancelTest Completed");
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
 	@Test(priority = 5, enabled = true)
-	public void linkAccountCardExpirationMissingTest() throws Exception {
+	public void linkAccountCardExpirationMissingTest(ITestContext context) throws Exception {
+		String testCaseName = "186005:linkAccountCardExpirationMissingTest";
 
-	    Log.info("186005");
-		coreTest.signIn(driver);
-		SearchPage sPage = getSearchPage();
-		sPage.selectSearchTypeCustomer(driver);
-		sPage.clickCustomerType(driver, Global.CUSTOMERTYPE);
-		sPage.enterFirstname(driver, Global.FNAME);
-		sPage.enterLastname(driver, Global.LNAME);
-		sPage.clickSearch(driver);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
-		Utils.waitTime(5000);
-		sPage.clickRecord(driver);
-		sPage.clickSecurityBox(driver);
-		sPage.clickContiune(driver);
-		sPage.clickLinkAccount(driver);
-		LinkAccountPage lPage = new LinkAccountPage(driver);
-		lPage.enterBankAccount(driver, Global.CC);
-		Assert.assertFalse(lPage.isSearchTokenEnabled(driver));
-		driver.close();
-
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("186005");
+			coreTest.signIn(driver);
+			SearchPage sPage = getSearchPage();
+			sPage.selectSearchTypeCustomer(driver);
+			sPage.clickCustomerType(driver, Global.CUSTOMERTYPE);
+			sPage.enterFirstname(driver, Global.FNAME);
+			sPage.enterLastname(driver, Global.LNAME);
+			sPage.clickSearch(driver);
+			((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
+			Utils.waitTime(5000);
+			sPage.clickRecord(driver);
+			sPage.clickSecurityBox(driver);
+			sPage.clickContiune(driver);
+			sPage.clickLinkAccount(driver);
+			LinkAccountPage lPage = new LinkAccountPage(driver);
+			lPage.enterBankAccount(driver, Global.CC);
+			Assert.assertFalse(lPage.isSearchTokenEnabled(driver));
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
 	@Test(priority = 6, enabled = true)
-	public void linkAccountBankAccountMissingTest() throws Exception {
+	public void linkAccountBankAccountMissingTest(ITestContext context) throws Exception {
+		String testCaseName = "186006:linkAccountBankAccountMissingTest";
 
-	    Log.info("186006");
-		coreTest.signIn(driver);
-		SearchPage sPage = getSearchPage();
-		sPage.selectSearchTypeCustomer(driver);
-		sPage.clickCustomerType(driver, Global.CUSTOMERTYPE);
-		sPage.enterFirstname(driver, Global.FNAME);
-		sPage.enterLastname(driver, Global.LNAME);
-		sPage.clickSearch(driver);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
-		Utils.waitTime(5000);
-		sPage.clickRecord(driver);
-		sPage.clickSecurityBox(driver);
-		sPage.clickContiune(driver);
-		sPage.clickLinkAccount(driver);
-		LinkAccountPage lPage = new LinkAccountPage(driver);
-		lPage.selectExpMonth(driver);
-		lPage.selectExpYear(driver, 2);
-		Assert.assertFalse(lPage.isSearchTokenEnabled(driver));
-		driver.close();
-
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("186006");
+			coreTest.signIn(driver);
+			SearchPage sPage = getSearchPage();
+			sPage.selectSearchTypeCustomer(driver);
+			sPage.clickCustomerType(driver, Global.CUSTOMERTYPE);
+			sPage.enterFirstname(driver, Global.FNAME);
+			sPage.enterLastname(driver, Global.LNAME);
+			sPage.clickSearch(driver);
+			((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -275)", "");
+			Utils.waitTime(5000);
+			sPage.clickRecord(driver);
+			sPage.clickSecurityBox(driver);
+			sPage.clickContiune(driver);
+			sPage.clickLinkAccount(driver);
+			LinkAccountPage lPage = new LinkAccountPage(driver);
+			lPage.selectExpMonth(driver);
+			lPage.selectExpYear(driver, 2);
+			Assert.assertFalse(lPage.isSearchTokenEnabled(driver));
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
 	// CCD-909 test case
 	@Test(priority = 7, enabled = true)
-	public void linkAccountMessageTest() throws Exception {
+	public void linkAccountMessageTest(ITestContext context) throws Exception {
+		String testCaseName = "29945:linkAccountMessageTest";
 
-	    Log.info("29945");
-		// create balance via soap call
-		SOAPClientSAAJ sClient = new SOAPClientSAAJ();
-		CreditCardNumberGenerator ccGenerator = new CreditCardNumberGenerator();
-		String validCCNumber = ccGenerator.generate("4", 16);
-		String accountID = sClient.createABPAccountSOAPCall(validCCNumber);
-		Log.info("cc number being used is " + validCCNumber);
-		Log.info("account id being returned is " + accountID);
-		Log.info("waiting for ABP to get updated");
-		Utils.waitTime(120000);
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29945");
+			// create balance via soap call
+			SOAPClientSAAJ sClient = new SOAPClientSAAJ();
+			CreditCardNumberGenerator ccGenerator = new CreditCardNumberGenerator();
+			String validCCNumber = ccGenerator.generate("4", 16);
+			String accountID = sClient.createABPAccountSOAPCall(validCCNumber);
+			Log.info("cc number being used is " + validCCNumber);
+			Log.info("account id being returned is " + accountID);
+			Log.info("waiting for ABP to get updated");
+			Utils.waitTime(120000);
 
-		// create account and link it to cc
-		//coreTest.signIn(driver);
-		//coreTest.createCustomer(driver);
-		
-		createNewCustomer(driver);
-		BasePage bPage = new BasePage(driver);
-		bPage.clickLinkAccount(driver);
-		LinkAccountPage lPage = new LinkAccountPage(driver);
+			// create account and link it to cc
+			//coreTest.signIn(driver);
+			//coreTest.createCustomer(driver);
 
-		// first attempt to link with invalid cc token
-		String invalidCCNumber = ccGenerator.generate("4", 16);
-		lPage.enterBankAccount(driver, invalidCCNumber);
-		lPage.selectExpMonth(driver);
-		lPage.selectExpYear(driver, 2);
-		lPage.clickSearchToken(driver);
-		Assert.assertEquals(lPage.getAccountNotFoundError(driver), "Account not found");
+			createNewCustomer(driver);
+			BasePage bPage = new BasePage(driver);
+			bPage.clickLinkAccount(driver);
+			LinkAccountPage lPage = new LinkAccountPage(driver);
 
-		// now use valid cc number from soap call to link account
-		lPage.clearBankAccount(driver);
-		lPage.enterBankAccount(driver, validCCNumber);
-		lPage.selectExpMonth(driver);
-		lPage.selectExpYear(driver, 2);
-		lPage.clickSearchToken(driver);
+			// first attempt to link with invalid cc token
+			String invalidCCNumber = ccGenerator.generate("4", 16);
+			lPage.enterBankAccount(driver, invalidCCNumber);
+			lPage.selectExpMonth(driver);
+			lPage.selectExpYear(driver, 2);
+			lPage.clickSearchToken(driver);
+			Assert.assertEquals(lPage.getAccountNotFoundError(driver), "Account not found");
 
-		// make assertions that account not found is not being displayed
-		Assert.assertFalse(lPage.isAccountNotFoundErrorDisplayed(driver));
-		driver.close();
+			// now use valid cc number from soap call to link account
+			lPage.clearBankAccount(driver);
+			lPage.enterBankAccount(driver, validCCNumber);
+			lPage.selectExpMonth(driver);
+			lPage.selectExpYear(driver, 2);
+			lPage.clickSearchToken(driver);
 
+			// make assertions that account not found is not being displayed
+			Assert.assertFalse(lPage.isAccountNotFoundErrorDisplayed(driver));
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 	
 	private WebDriver createNewCustomer(WebDriver driver) throws Exception {

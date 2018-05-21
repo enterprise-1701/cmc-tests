@@ -10,7 +10,7 @@
      <parameter name="projectID" value="35"></parameter>
      <parameter name="suiteID" value="549"></parameter>
 	<test name="ChromeTest">
-		<parameter name="browser" value="chrome.exe" />
+		<parameter name="browser" value="chrome" />
 		<classes>
 		    <class name="com.cubic.cmctests.testslegacy.CreateCustomerAPITest" />
 			<class name="com.cubic.cmctests.testslegacy.BalanceHistoryTest"/>

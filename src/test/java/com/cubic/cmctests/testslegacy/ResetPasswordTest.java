@@ -1,11 +1,15 @@
 package com.cubic.cmctests.testslegacy;
 
 import java.util.concurrent.TimeUnit;
+
+import com.cubic.accelerators.RESTActions;
+import com.cubic.accelerators.RESTEngine;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.os.WindowsUtils;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -20,7 +24,7 @@ import com.cubic.cmcjava.utils.*;
 //
 //#################################################################################
 
-public class ResetPasswordTest {
+public class ResetPasswordTest extends RESTEngine {
 
 	private static Logger Log = Logger.getLogger(Logger.class.getName());
 	private static final String CONTACTS = "Contacts";
@@ -31,6 +35,7 @@ public class ResetPasswordTest {
 	static WebDriver driver;
 	static String browser;
 	CoreTest coreTest = new CoreTest();
+	RESTActions restActions;
 
 	@Parameters("browser")
 	@BeforeMethod
@@ -48,39 +53,69 @@ public class ResetPasswordTest {
 
 	// STA-828
 	@Test(priority = 1, enabled = true)
-	public void resetPassword() throws Exception {
+	public void resetPassword(ITestContext context) throws Exception {
+		String testCaseName = "29960:resetPassword";
 
-	    Log.info("29960");
-		getPasswordConfirmation(driver);
-		ConfirmationPage cPage = new ConfirmationPage(driver);
-		cPage.clickYes(driver);
-		Assert.assertEquals(cPage.getContacts(driver), CONTACTS);
-		driver.close();
-
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29960");
+			getPasswordConfirmation(driver);
+			ConfirmationPage cPage = new ConfirmationPage(driver);
+			cPage.clickYes(driver);
+			Assert.assertEquals(cPage.getContacts(driver), CONTACTS);
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
 	@Test(priority = 2, enabled = true)
-	public void resetPasswordCancel() throws Exception {
+	public void resetPasswordCancel(ITestContext context) throws Exception {
+		String testCaseName = "29959:resetPasswordCancel";
 
-	    Log.info("29959");
-		getPasswordConfirmation(driver);
-		ConfirmationPage cPage = new ConfirmationPage(driver);
-		cPage.clickNo(driver);
-		Assert.assertEquals(cPage.getContacts(driver), CONTACTS);
-		driver.close();
-
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("29959");
+			getPasswordConfirmation(driver);
+			ConfirmationPage cPage = new ConfirmationPage(driver);
+			cPage.clickNo(driver);
+			Assert.assertEquals(cPage.getContacts(driver), CONTACTS);
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
 	@Test(priority = 3, enabled = true)
-	public void resetPasswordClose() throws Exception {
+	public void resetPasswordClose(ITestContext context) throws Exception {
+		String testCaseName = "185970:resetPasswordClose";
 
-	    Log.info("185970");
-		getPasswordConfirmation(driver);
-		ConfirmationPage cPage = new ConfirmationPage(driver);
-		cPage.clickClose(driver);
-		Assert.assertEquals(cPage.getContacts(driver), CONTACTS);
-		driver.close();
-
+		try {
+			restActions = setupAutomationTest(context, testCaseName);
+			restActions.successReport("test", "test");
+			Log.info("185970");
+			getPasswordConfirmation(driver);
+			ConfirmationPage cPage = new ConfirmationPage(driver);
+			cPage.clickClose(driver);
+			Assert.assertEquals(cPage.getContacts(driver), CONTACTS);
+			driver.close();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			teardownAutomationTest(context, testCaseName);
+		}
 	}
 
 	// private methods

@@ -24,7 +24,7 @@ public class CustomerResetPasswordTest extends WebDriverEngine {
     private String folder = "Inbox/Cmc";
 
     @Test(dataProvider = AppConstants.DATA_PROVIDER, dataProviderClass = CMCDataProviderSource.class)
-    public void C11628_CustomerResetPasswordTest(ITestContext context, Hashtable<String, String> data) throws Throwable {
+    public void CustomerResetPasswordTest(ITestContext context, Hashtable<String, String> data) throws Throwable {
         String testCaseName = data.get("TestCase_Description");
         WebDriverActions action = setupAutomationTest(context, testCaseName);
         CommonLib commonLib = new CommonLib(data, action);
