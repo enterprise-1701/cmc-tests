@@ -205,7 +205,6 @@ public class SearchTest2 extends RESTEngine {
 		}
 	}
 
-	// TODO: Find test case number
 	// Test new search button on upper right of screen
 	@Test(priority = 13, enabled = true)
 	public void searchNewSearchButton(ITestContext context) throws Exception {

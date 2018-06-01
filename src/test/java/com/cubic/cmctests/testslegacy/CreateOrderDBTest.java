@@ -122,7 +122,6 @@ public class CreateOrderDBTest extends RESTEngine {
 		}
 	}
 
-	// TODO: Find a test case number for this
 	@Test(priority = 2, enabled = true)
 	public void createOrderCancelDBcheck(ITestContext context) throws Exception {
 		String testCaseName = "815092:createOrderCancelDBcheck";
