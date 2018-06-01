@@ -275,7 +275,7 @@ public class TokenSearchTest extends RESTEngine {
     // STA-698 - Search and view unregistered customer
     @Test(priority = 9, enabled = true)
     public void searchUnregistredCustomer(ITestContext context) throws Exception {
-        String testCaseName = "searchUnregisteredCustomer";
+        String testCaseName = "29968:searchUnregisteredCustomer";
 
         try {
             restActions = setupAutomationTest(context, testCaseName);

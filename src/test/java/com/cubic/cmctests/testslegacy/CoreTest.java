@@ -96,11 +96,11 @@ public class CoreTest {
 		nPaget.enterPostalCode(driver, Global.POSTAL);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-250)", "");
 		nPaget.selectPhoneType(driver, Global.PHONETYPE);
-		nPaget.selectSecurityQ(driver);
-		nPaget.enterSecuirtyA(driver, Global.SECURITYA);
+//		nPaget.selectSecurityQ(driver);
+//		nPaget.enterSecuirtyA(driver, Global.SECURITYA);
 		nPaget.enterUserName(driver, userData.getEmail());
 		nPaget.enterPin(driver, Global.PIN);
-		nPaget.clickPinLabel(driver);
+//		nPaget.clickPinLabel(driver);
 		nPaget.enterDob(driver, Global.DOB);
 		nPaget.clickSubmit(driver);
 		return driver;
