@@ -98,12 +98,12 @@ public class UpdateAddressTest extends RESTEngine {
 	// test after canceling new address is not created
 	@Test(priority = 2, enabled = true)
 	public void addNewAddressCancel(ITestContext context) throws Exception {
-		String testCaseName = "185987:addNewAddressCancel";
+		String testCaseName = "934077:addNewAddressCancel";
 
 		try {
 			restActions = setupAutomationTest(context, testCaseName);
 			restActions.successReport("test", "test");
-			Log.info("185987");
+			Log.info("934077");
 			createNewCustomer(driver);
 			SearchPage sPage = new SearchPage(driver);
 			Utils.waitTime(15000);

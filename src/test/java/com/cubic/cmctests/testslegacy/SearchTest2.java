@@ -356,12 +356,12 @@ public class SearchTest2 extends RESTEngine {
 	// information page
 	@Test(priority = 16, enabled = true)
 	public void searchCustomerClickNotVerified(ITestContext context) throws Exception {
-		String testCaseName = "185981:searchCustomerClickNotVerified";
+		String testCaseName = "934078:searchCustomerClickNotVerified";
 
 		try {
 			restActions = setupAutomationTest(context, testCaseName);
 			restActions.successReport("test", "test");
-			Log.info("185981");
+			Log.info("934078");
 			// Create customer test data via api rest call
 			cData = ApiCustomerPost.apiPostSuccess();
 			email = cData.getEmail();

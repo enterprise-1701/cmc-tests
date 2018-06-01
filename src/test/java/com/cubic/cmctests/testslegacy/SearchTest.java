@@ -295,7 +295,7 @@ public class SearchTest extends RESTEngine {
 	// Postal code Search
 	@Test(priority = 8, enabled = true)
 	public void searchCustomerPostalCode(ITestContext context) throws Exception {
-		String testCaseName = "29965";
+		String testCaseName = "29965:searchCustomerPostalCode";
 
 		try {
 			restActions = setupAutomationTest(context, testCaseName);

@@ -161,7 +161,7 @@ public class UpdateFundingTest extends RESTEngine {
 	// Test case for updating primary card
 	@Test(priority = 3, enabled = true)
 	public void updatePrimaryFundingTest(ITestContext context) throws Exception {
-		String testCaseName = "29982";
+		String testCaseName = "29982:updatePrimaryFundingTest";
 
 		try {
 			restActions = setupAutomationTest(context, testCaseName);

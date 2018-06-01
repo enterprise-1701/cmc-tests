@@ -344,12 +344,12 @@ public class CreateFundingTest extends RESTEngine {
 	
 	@Test(priority = 9, enabled = true)
 	public void createFundingSourceInvalidCCType(ITestContext context) throws Exception {
-		String testCaseName = "29923:createFundingSourceInvalidCCType";
+		String testCaseName = "934079:createFundingSourceInvalidCCType";
 
 		try {
 			restActions = setupAutomationTest(context, testCaseName);
 			restActions.successReport("test", "test");
-			Log.info("29923");
+			Log.info("934079");
 			createNewCustomer(driver);
 			NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
 			Utils.waitTime(3000);
