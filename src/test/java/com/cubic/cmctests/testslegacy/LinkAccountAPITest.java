@@ -188,34 +188,6 @@ public class LinkAccountAPITest extends RESTEngine {
 		}
 	}
 
-	@Test(priority = 4, enabled = true)
-	public void linkAccountCancelTest(ITestContext context) throws Exception {
-		String testCaseName = "29941:linkAccountCancelTest";
-
-		try {
-			restActions = setupAutomationTest(context, testCaseName);
-			restActions.successReport("test", "test");
-			Log.info("29941");
-			createNewCustomer(driver);
-			BasePage bPage = new BasePage(driver);
-			bPage.clickLinkAccount(driver);
-			LinkAccountPage lPage = new LinkAccountPage(driver);
-			lPage.enterBankAccount(driver, Global.CC);
-			lPage.selectExpMonth(driver);
-			lPage.selectExpYear(driver, 2);
-			lPage.clickCancel(driver);
-			Assert.assertTrue(lPage.isLinkAccountDisplayed(driver));
-			Log.info("linkAccountCancelTest Completed");
-			driver.close();
-		} catch (RuntimeException e) {
-			e.printStackTrace();
-			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());
-			throw new RuntimeException(e);
-		} finally {
-			teardownAutomationTest(context, testCaseName);
-		}
-	}
-
 	@Test(priority = 5, enabled = true)
 	public void linkAccountCardExpirationMissingTest(ITestContext context) throws Exception {
 		String testCaseName = "186005:linkAccountCardExpirationMissingTest";
