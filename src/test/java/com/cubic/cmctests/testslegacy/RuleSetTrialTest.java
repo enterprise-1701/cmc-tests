@@ -42,7 +42,6 @@ public class RuleSetTrialTest extends RESTEngine {
 		Log.info("Setup Completed");
 	}	
 
-	// TODO: Need a test case number
 	@Test(priority = 1, enabled = true)
 	public void createRuleSetTrial(ITestContext context) throws Exception {
 		String testCaseName = "161529:createRuleSetTrial";
@@ -66,6 +65,7 @@ public class RuleSetTrialTest extends RESTEngine {
 			createTrialPage.selectAcquirer(driver, "ABP");
 			createTrialPage.setBatch(driver, "0");
 			createTrialPage.clickSubmitButton(driver);
+			driver.close();
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			restActions.failureReport("Unhandled Exception Thrown", e.getMessage());

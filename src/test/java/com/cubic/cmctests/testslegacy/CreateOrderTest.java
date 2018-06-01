@@ -104,7 +104,6 @@ public class CreateOrderTest extends RESTEngine {
 		}
 	}
 
-	// TODO: Find a test case number for this
 	@Test(priority = 2, enabled = true)
 	public void createOrderCancel(ITestContext context) throws Exception {
 		String testCaseName = "815094:createOrderCancel";

@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import com.cubic.cmcjava.utils.*;
 
-
+// Don't run in regression
 public class SauceLabTest {
 
 	static String browser;

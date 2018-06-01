@@ -58,12 +58,12 @@ public class TokenSearchAPITest extends RESTEngine {
 	// token verification based on linking account
 	@Test(priority = 1, enabled = true)
 	public void tokenVerificationLinkAccount(ITestContext context) throws Exception {
-		String testCaseName = "185927:tokenVerificationLinkAccount";
+		String testCaseName = "185982:tokenVerificationLinkAccount";
 
 		try {
 			restActions = setupAutomationTest(context, testCaseName);
 			restActions.successReport("test", "test");
-			Log.info("185927");
+			Log.info("185982");
 			createNewCustomer(driver);
 			NewCustomerDisplayPage nPage3 = new NewCustomerDisplayPage(driver);
 			Utils.waitTime(6000);

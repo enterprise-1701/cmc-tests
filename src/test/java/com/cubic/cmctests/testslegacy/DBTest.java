@@ -13,6 +13,7 @@ import com.cubic.cmcjava.dao.DBAutomation;
 //Generic test to check DB connections
 //#################################################################################
 
+// Don't run in regression
 public class DBTest {
 
 	private static Logger Log = Logger.getLogger(Logger.class.getName());
@@ -35,7 +36,6 @@ public class DBTest {
 	}
 	*/
 
-	// TODO: Find out if I should bother with this one
 	@Test(enabled = true)
 	public void checkDB() throws Exception {
 

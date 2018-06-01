@@ -20,6 +20,7 @@ import com.cubic.cmcjava.utils.*;
 // 
 //#################################################################################
 
+// Don't run in regression
 public class GetCustomerAPITest {
 
 	private static Logger Log = Logger.getLogger(Logger.class.getName());
@@ -43,7 +44,6 @@ public class GetCustomerAPITest {
 		Log.info("Setup Completed");
 	}
 
-	// TODO: Find out if I should bother with this one
 	@Test(priority = 1, enabled = true)
 	public void getCustomerApi() throws Exception {
 
