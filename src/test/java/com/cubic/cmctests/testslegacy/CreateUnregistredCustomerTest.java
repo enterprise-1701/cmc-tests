@@ -192,7 +192,10 @@ public class CreateUnregistredCustomerTest extends RESTEngine {
 			String accountID = sClient.createABPAccountSOAPCall(validCCNumber);
 			System.out.println("cc number being used is " + validCCNumber);
 			System.out.println("account id being returned is " + accountID);
-			Utils.waitTime(120000);
+			for (int i = 0; i < 2; i++) {
+				Thread.sleep(60000);
+				driver.navigate().refresh();
+			}
 
 			// Search for token using same cc number
 			coreTest.signIn(driver);

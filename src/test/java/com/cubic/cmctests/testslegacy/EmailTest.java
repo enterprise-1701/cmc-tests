@@ -104,7 +104,10 @@ public class EmailTest extends RESTEngine {
 			coreTest.createOrderSubmit(driver, email);
 			Log.info("New customer created, New order created");
 			Log.info("Waiting for emails to get generated");
-			Utils.waitTime(300000);
+			for (int i = 0; i < 5; i++) {
+				Thread.sleep(60000);
+				driver.navigate().refresh();
+			}
 
 			// Check both create order emails
 			Properties props = System.getProperties();
@@ -179,7 +182,10 @@ public class EmailTest extends RESTEngine {
 			lPage.enterNickNameAccountNotFound(driver, "adam");
 			lPage.clickRegisterAndLink(driver);
 			Log.info("Waiting for emails to get generated");
-			Utils.waitTime(180000);
+			for (int i = 0; i < 3; i++) {
+				Thread.sleep(60000);
+				driver.navigate().refresh();
+			}
 
 			// Check Link Account Email
 			Assert.assertTrue(checkEmailSubjectInterval("Link Account Confirmation"),
@@ -210,7 +216,10 @@ public class EmailTest extends RESTEngine {
 			coreTest.updateContact(driver, email);
 			Log.info("Customer contact info updated");
 			Log.info("Waiting for emails to get generated");
-			Utils.waitTime(180000);
+			for (int i = 0; i < 3; i++) {
+				Thread.sleep(60000);
+				driver.navigate().refresh();
+			}
 
 			Assert.assertTrue(checkEmailSubjectInterval("Customer Contact Update"),
 					"Customer Contact Update Email Test Failed");
@@ -250,7 +259,10 @@ public class EmailTest extends RESTEngine {
 
 			// Check password reset email
 			Log.info("Waiting for emails to get generated");
-			Utils.waitTime(180000);
+			for (int i = 0; i < 3; i++) {
+				Thread.sleep(60000);
+				driver.navigate().refresh();
+			}
 			Assert.assertTrue(checkEmailSubjectInterval("Password Reset Verification"),
 					"Password Reset Verification Email Test Failed");
 			driver.close();
@@ -294,7 +306,10 @@ public class EmailTest extends RESTEngine {
 
 			// Check delete funding email
 			Log.info("Waiting for emails to get generated");
-			Utils.waitTime(180000);
+			for (int i = 0; i < 3; i++) {
+				Thread.sleep(60000);
+				driver.navigate().refresh();
+			}
 			Assert.assertTrue(checkEmailSubjectInterval("Customer Funding Source Update"),
 					"Customer Funding Source Update Email Test Failed");
 			driver.close();

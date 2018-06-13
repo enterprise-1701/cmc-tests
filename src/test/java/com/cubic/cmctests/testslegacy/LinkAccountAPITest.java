@@ -70,7 +70,10 @@ public class LinkAccountAPITest extends RESTEngine {
 			Log.info("cc number being used is " + validCCNumber);
 			Log.info("account id being returned is " + accountID);
 			Log.info("waiting for ABP to get updated");
-			Utils.waitTime(120000);
+			for (int i = 0; i < 2; i++) {
+				Thread.sleep(60000);
+				driver.navigate().refresh();
+			}
 
 			// create account and link it to cc
 			//coreTest.signIn(driver);
@@ -117,7 +120,10 @@ public class LinkAccountAPITest extends RESTEngine {
 			Log.info("cc number being used is " + validCCNumber);
 			Log.info("account id being returned is " + accountID);
 			Log.info("waiting for ABP to get updated");
-			Utils.waitTime(120000);
+			for (int i = 0; i < 2; i++) {
+				Thread.sleep(60000);
+				driver.navigate().refresh();
+			}
 
 			// create account and link it to cc
 			coreTest.signIn(driver);
@@ -205,7 +211,10 @@ public class LinkAccountAPITest extends RESTEngine {
 			Log.info("cc number being used is " + validCCNumber);
 			Log.info("account id being returned is " + accountID);
 			Log.info("waiting for ABP to get updated");
-			Utils.waitTime(120000);
+			for (int i = 0; i < 2; i++) {
+				Thread.sleep(60000);
+				driver.navigate().refresh();
+			}
 
 			// create account and link it to cc
 			//coreTest.signIn(driver);
