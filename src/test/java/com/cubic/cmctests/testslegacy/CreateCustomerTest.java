@@ -51,7 +51,7 @@ public class CreateCustomerTest extends RESTEngine {
 	}
 
 	// pass
-	@Test(priority = 1, enabled = true)
+	@Test(priority = 1, enabled = false)
 	public void createNewCustomer(ITestContext context) throws Exception {
 		String testCaseName = "29920:createNewCustomer";
 
@@ -129,7 +129,7 @@ public class CreateCustomerTest extends RESTEngine {
 	}
 
 	// pass
-	@Test(priority = 3, enabled = true)
+	@Test(priority = 3, enabled = false)
 	public void createCustomerContactTypeNotSelected(ITestContext context) throws Exception {
 		String testCaseName = "29914:createCustomerContactTypeNotSelected";
 
@@ -210,7 +210,7 @@ public class CreateCustomerTest extends RESTEngine {
 	}
 
 	// pass
-	@Test(priority = 5, enabled = true)
+	@Test(priority = 5, enabled = false)
 	public void createCustomerInvalidPin(ITestContext context) throws Exception {
 		String testCaseName = "29918:createCustomerInvalidPIN";
 
@@ -242,7 +242,7 @@ public class CreateCustomerTest extends RESTEngine {
 	}
 
 	// pass
-	@Test(priority = 6, enabled = true)
+	@Test(priority = 6, enabled = false)
 	public void createCustomerInvalidUserName(ITestContext context) throws Exception {
 		String testCaseName = "29919:createCustomerInvalidUserName";
 
@@ -271,7 +271,7 @@ public class CreateCustomerTest extends RESTEngine {
 	}
 
 	// pass
-	@Test(priority = 7, enabled = true)
+	@Test(priority = 7, enabled = false)
 	public void createCustomerDuplicateUserName(ITestContext context) throws Exception {
 		String testCaseName = "29915:createCustomerDuplicateUserName";
 
@@ -410,7 +410,7 @@ public class CreateCustomerTest extends RESTEngine {
 	}
 
 	// pin should not contain user name
-	@Test(priority = 11, enabled = true)
+	@Test(priority = 11, enabled = false)
 	public void createCustomerInvalidPinHasUserName(ITestContext context) throws Exception {
 		String testCaseName = "185953:createCustomerInvalidPinHasUserName";
 
@@ -447,7 +447,7 @@ public class CreateCustomerTest extends RESTEngine {
 		}
 	}
 
-	@Test(priority = 12, enabled = true)
+	@Test(priority = 12, enabled = false)
 	public void createCustomerPostalCodeMissing(ITestContext context) throws Exception {
 		String testCaseName = "185954:createCustomerPostalCodeMissing";
 
@@ -483,7 +483,7 @@ public class CreateCustomerTest extends RESTEngine {
 	}
 
 	// CCD-584 - Using + in gmail account
-	@Test(priority = 13, enabled = true)
+	@Test(priority = 13, enabled = false)
 	public void createNewCustomerGmailPlus(ITestContext context) throws Exception {
 		String testCaseName = "185955:createNewCustomerGmailPlus";
 

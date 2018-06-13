@@ -12,14 +12,14 @@
 	<parameter name="suiteID" value="549"/>
 
 	<test name="CMCTests - Chrome">
-		<parameter name="browser" value="saucelabs"/>
+		<parameter name="browser" value="chrome"/>
 		<classes>
-			<!--<class name="com.cubic.cmctests.testslegacy.TestScript_Driver"/>-->
+			<class name="com.cubic.cmctests.testslegacy.TestScript_Driver"/>
 			<!--<class name="com.cubic.cmctests.testslegacy.BalanceHistoryTest"/>-->
 			<!--<class name="com.cubic.cmctests.testslegacy.CreateCustomerAPITest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.CreateCustomerDBTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.CreateCustomerTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.CreateFundingTest"/>-->
+			<class name="com.cubic.cmctests.testslegacy.CreateCustomerDBTest"/>
+			<class name="com.cubic.cmctests.testslegacy.CreateCustomerTest"/>
+			<class name="com.cubic.cmctests.testslegacy.CreateFundingTest"/>
 			<!--<class name="com.cubic.cmctests.testslegacy.CreateOrderDBTest"/>-->
 			<!--<class name="com.cubic.cmctests.testslegacy.CreateOrderTest"/>-->
 			<!--<class name="com.cubic.cmctests.testslegacy.CreateUnregistredCustomerTest"/>-->
@@ -32,7 +32,7 @@
 			<!--<class name="com.cubic.cmctests.testslegacy.NotificationPrefTest"/>-->
 			<!--<class name="com.cubic.cmctests.testslegacy.ResetPasswordTest"/>-->
 			<!--<class name="com.cubic.cmctests.testslegacy.RuleSetTrialTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.SearchTest"/>-->
+			<class name="com.cubic.cmctests.testslegacy.SearchTest"/>
 			<!--<class name="com.cubic.cmctests.testslegacy.SearchTest2"/>-->
 			<!--<class name="com.cubic.cmctests.testslegacy.TokenSearchAPITest"/>-->
 			<class name="com.cubic.cmctests.testslegacy.TokenSearchTest"/>

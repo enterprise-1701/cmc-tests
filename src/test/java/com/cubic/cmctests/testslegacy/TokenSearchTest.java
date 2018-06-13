@@ -159,7 +159,7 @@ public class TokenSearchTest extends RESTEngine {
     }
 
     // Search token no record found
-    @Test(priority = 5, enabled = true)
+    @Test(priority = 5, enabled = false)
     public void searchTokenNoRecordFound(ITestContext context) throws Exception {
         String testCaseName = "27800:searchTokenNoRecordFound";
 
@@ -185,7 +185,7 @@ public class TokenSearchTest extends RESTEngine {
     }
 
     // Search token no record found new search
-    @Test(priority = 6, enabled = true)
+    @Test(priority = 6, enabled = false)
     public void searchTokenNoRecordFoundNewSearch(ITestContext context) throws Exception {
         String testCaseName = "185360:searchTokenNoRecordFoundNewSearch";
 
@@ -213,7 +213,7 @@ public class TokenSearchTest extends RESTEngine {
     }
 
     // Search token invalid token search
-    @Test(priority = 7, enabled = true)
+    @Test(priority = 7, enabled = false)
     public void searchTokenInvalidTokenSearch(ITestContext context) throws Exception {
         String testCaseName = "29970:searchTokenInvalidTokenSearch";
 
@@ -242,7 +242,7 @@ public class TokenSearchTest extends RESTEngine {
     }
 
     // Search token invalid token search new search
-    @Test(priority = 8, enabled = true)
+    @Test(priority = 8, enabled = false)
     public void searchTokenInvalidTokenNewSearch(ITestContext context) throws Exception {
         String testCaseName = "185366:searchTokenInvalidTokenNewSearch";
 
@@ -273,7 +273,7 @@ public class TokenSearchTest extends RESTEngine {
     }
 
     // STA-698 - Search and view unregistered customer
-    @Test(priority = 9, enabled = true)
+    @Test(priority = 9, enabled = false)
     public void searchUnregistredCustomer(ITestContext context) throws Exception {
         String testCaseName = "29968:searchUnregisteredCustomer";
 
@@ -306,7 +306,7 @@ public class TokenSearchTest extends RESTEngine {
     }
 
     // STA-698 - Search and view registered customer
-    @Test(priority = 10, enabled = true)
+    @Test(priority = 10, enabled = false)
     public void searchRegistredCustomer(ITestContext context) throws Exception {
         String testCaseName = "29973:searchRegisteredCustomer";
 
@@ -370,7 +370,7 @@ public class TokenSearchTest extends RESTEngine {
     }
 
     // Fail due to CCBO-8318
-    @Test(priority = 11, enabled = true)
+    @Test(priority = 11, enabled = false)
     public void searchRegistredCustomerVerifiedThreeInfo(ITestContext context) throws Exception {
         String testCaseName = "185925:searchRegisteredCustomerVerifiedThreeInfo";
 
@@ -433,7 +433,7 @@ public class TokenSearchTest extends RESTEngine {
 
     // Fail due to CCBO-8318
     // Search and view subsystem page for registered customer
-    @Test(priority = 12, enabled = true)
+    @Test(priority = 12, enabled = false)
     public void viewRegistredCustomerSubsystemPage(ITestContext context) throws Exception {
         String testCaseName = "185926:viewRegisteredCustomerSubsystemPage";
 
@@ -493,7 +493,7 @@ public class TokenSearchTest extends RESTEngine {
 
    
     // token verification test
-    @Test(priority = 13, enabled = true)
+    @Test(priority = 13, enabled = false)
     public void searchTokenVerification(ITestContext context) throws Exception {
         String testCaseName = "185927:searchTokenVerification";
 
@@ -524,7 +524,7 @@ public class TokenSearchTest extends RESTEngine {
 
     // CCD-839
     // Fail due to CCBO-8318
-    @Test(priority = 15, enabled = true)
+    @Test(priority = 15, enabled = false)
     public void tokenSearchWithSpace(ITestContext context) throws Exception {
         String testCaseName = "185928:tokenSearchWithSpace";
 
@@ -584,7 +584,7 @@ public class TokenSearchTest extends RESTEngine {
     }
 
     // CCD-320
-    @Test(priority = 16, enabled = true)
+    @Test(priority = 16, enabled = false)
     public void searchTokenClickHome(ITestContext context) throws Exception {
         String testCaseName = "185929:searchTokenClickHome";
 

@@ -54,7 +54,7 @@ public class CreateCustomerDBTest extends RESTEngine {
 	}
 
 
-	@Test(priority = 1, enabled = true)
+	@Test(priority = 1, enabled = false)
 	public void createNewCustomerDBCheckContactTable(ITestContext context) throws Exception {
 		String testCaseName = "185944:createNewCustomerDBCheckContactTable";
 		restActions = setupAutomationTest(context, testCaseName);
@@ -83,7 +83,7 @@ public class CreateCustomerDBTest extends RESTEngine {
 		}
 	}
 	
-	@Test(priority = 2, enabled = true)
+	@Test(priority = 2, enabled = false)
 	public void createNewCustomerDBCheckAccountTable(ITestContext context) throws Exception {
 		String testCaseName = "185945:createNewCustomerDBCheckAccountTable";
 
@@ -114,7 +114,7 @@ public class CreateCustomerDBTest extends RESTEngine {
 		}
 	}
 		
-	@Test(priority = 3, enabled = true)
+	@Test(priority = 3, enabled = false)
 	public void createNewCustomerDBCheckAddressTable(ITestContext context) throws Exception {
 		String testCaseName = "185946:createNewCustomerDBCheckAddressTable";
 
@@ -144,7 +144,7 @@ public class CreateCustomerDBTest extends RESTEngine {
 	}
 	
 	
-	@Test(priority = 4, enabled = true)
+	@Test(priority = 4, enabled = false)
 	public void createNewCustomerDBCheckSecurityTable(ITestContext context) throws Exception {
 		String testCaseName = "185947:createNewCustomerDBCheckSecurityTable";
 
@@ -172,7 +172,7 @@ public class CreateCustomerDBTest extends RESTEngine {
 		}
 	}
 	
-	@Test(priority = 5, enabled = true)
+	@Test(priority = 5, enabled = false)
 	public void createNewCustomerDBCheckPhoneTable(ITestContext context) throws Exception {
 		String testCaseName = "185948:createNewCustomerDBCheckPhoneTable";
 
