@@ -78,7 +78,10 @@ public class BalanceHistoryTest extends RESTEngine {
             Log.info("account id being returned is " + accountID);
 
             Log.info("wait time for balnce history to display on cmc");
-            Utils.waitTime(120000);
+            for (int i = 0; i < 2; i++) {
+                Thread.sleep(60000);
+                driver.navigate().refresh();
+            }
 
             coreTest.signIn(driver);
             TokenSearchPage tPage = getTokenSearchPage();
@@ -233,7 +236,10 @@ public class BalanceHistoryTest extends RESTEngine {
             Log.info("cc number being used the second time is " + validCCNumber);
             sClient.postTapSOAPCall(validCCNumber);
             Log.info("wait 1 minute for trip to get generated");
-            Utils.waitTime(120000);
+            for (int i = 0; i < 2; i++) {
+                Thread.sleep(60000);
+                driver.navigate().refresh();
+            }
             String initialBalance = (nPage3.getAccountBalances(driver).substring(1));
             Log.info("initial balance is: " + Double.valueOf(initialBalance));
 

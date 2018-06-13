@@ -68,7 +68,10 @@ public class TravelHistoryTest extends RESTEngine {
 			// check cmc for travel history based on cc
 			// takes around 6 minutes for travel history to show on cmc
 			Log.info("waiting for travel history to display on cmc");
-			Utils.waitTime(360000);
+			for (int i = 0; i < 6; i++) {
+				Thread.sleep(60000);
+				driver.navigate().refresh();
+			}
 
 			coreTest.signIn(driver);
 			TokenSearchPage tPage = getTokenSearchPage();
@@ -132,7 +135,10 @@ public class TravelHistoryTest extends RESTEngine {
 
 			// takes around 6 minutes for travel history to show on cmc
 			Log.info("waiting for travel history to display on cmc");
-			Utils.waitTime(360000);
+			for (int i = 0; i < 6; i++) {
+				Thread.sleep(60000);
+				driver.navigate().refresh();
+			}
 
 			// checking travel history under subaccount page
 			TokenSearchSubSystemPage ssPage = new TokenSearchSubSystemPage(driver);
