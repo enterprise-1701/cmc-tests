@@ -43,7 +43,7 @@ public class CreateCustomerAPITest extends RESTEngine {
 		*/
 		driver = Utils.openBrowser(browser);
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		Log.info("Setup Completed");
+//		Log.info("Setup Completed");
 	}
 
 	//Test update to GIT

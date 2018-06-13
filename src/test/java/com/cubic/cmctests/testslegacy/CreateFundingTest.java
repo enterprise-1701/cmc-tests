@@ -55,7 +55,7 @@ public class CreateFundingTest extends RESTEngine {
 //		Log.info("Setup Completed");
 	}
 
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1, enabled = true)
 	public void createFundingSource(ITestContext context) throws Exception {
 		String testCaseName = "29927:createFundingSource";
 
@@ -96,7 +96,7 @@ public class CreateFundingTest extends RESTEngine {
 		}
 	}
 
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	public void createFundingSourceNewBillingAddress(ITestContext context) throws Exception {
 		String testCaseName = "29921:createFundingSourceNewBillingAddress";
 
@@ -145,7 +145,7 @@ public class CreateFundingTest extends RESTEngine {
 		}
 	}
 
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3, enabled = true)
 	public void createFundingSourceCancel(ITestContext context) throws Exception {
 		String testCaseName = "29922:createFundingSourceCancel";
 
@@ -177,7 +177,7 @@ public class CreateFundingTest extends RESTEngine {
 	}
 
 
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4, enabled = true)
 	public void createFundingSourceTypeNotSelected(ITestContext context) throws Exception {
 		String testCaseName = "29926:createFundingSourceTypeNotSelected";
 
@@ -249,7 +249,7 @@ public class CreateFundingTest extends RESTEngine {
 		}
 	}
 
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 6, enabled = true)
 	public void createCustomerFundingInvalidCC(ITestContext context) throws Exception {
 		String testCaseName = "29923:createCustomerFundingInvalidCC";
 
@@ -280,7 +280,7 @@ public class CreateFundingTest extends RESTEngine {
 		}
 	}
 
-	@Test(priority = 7, enabled = false)
+	@Test(priority = 7, enabled = true)
 	public void createCustomerFundingInvalidName(ITestContext context) throws Exception {
 		String testCaseName = "185957:createCustomerFundingInvalidName";
 
@@ -310,7 +310,7 @@ public class CreateFundingTest extends RESTEngine {
 		}
 	}
 
-	@Test(priority = 8, enabled = false)
+	@Test(priority = 8, enabled = true)
 	public void createFundingSourceInvalidPanTooLong(ITestContext context) throws Exception {
 		String testCaseName = "185958:createFundingSourceInvalidPanTooLong";
 
@@ -342,7 +342,7 @@ public class CreateFundingTest extends RESTEngine {
 	}
 
 	
-	@Test(priority = 9, enabled = false)
+	@Test(priority = 9, enabled = true)
 	public void createFundingSourceInvalidCCType(ITestContext context) throws Exception {
 		String testCaseName = "934079:createFundingSourceInvalidCCType";
 
@@ -374,7 +374,7 @@ public class CreateFundingTest extends RESTEngine {
 		}
 	}
 
-	@Test(priority = 10, enabled = false)
+	@Test(priority = 10, enabled = true)
 	public void createFundingSourceInvalidExpirationDate(ITestContext context) throws Exception {
 		String testCaseName = "185960:createFundingSourceInvalidExpirationDate";
 
@@ -406,7 +406,7 @@ public class CreateFundingTest extends RESTEngine {
 	}
 
 	// Test case for second funding source with a different cc
-	@Test(priority = 11, enabled = false)
+	@Test(priority = 11, enabled = true)
 	public void createFundingSourceTwoCards(ITestContext context) throws Exception {
 		String testCaseName = "185961:createFundingSourceTwoCards";
 
@@ -465,7 +465,7 @@ public class CreateFundingTest extends RESTEngine {
 	}
 
 	// Test case for changing primary card
-	@Test(priority = 12, enabled = false)
+	@Test(priority = 12, enabled = true)
 	public void createFundingSourceChangePrimaryCard(ITestContext context) throws Exception {
 		String testCaseName = "29924:createFundingSourceChangePrimaryCard";
 
@@ -512,7 +512,7 @@ public class CreateFundingTest extends RESTEngine {
 	}
 
 	// Test case for attempting to change primary card and canceling
-	@Test(priority = 13, enabled = false)
+	@Test(priority = 13, enabled = true)
 	public void createFundingSourceChangePrimaryCardCancel(ITestContext context) throws Exception {
 		String testCaseName = "29925:createFundingSourceChangePrimaryCardCancel";
 
@@ -563,7 +563,7 @@ public class CreateFundingTest extends RESTEngine {
 	// #################################################################################
 	// Fix verification for CCD-853
 	// #################################################################################
-	@Test(priority = 14, enabled = false)
+	@Test(priority = 14, enabled = true)
 	public void createFundingNoAddress(ITestContext context) throws Exception {
 		String testCaseName = "185962:createFundingNoAddress";
 

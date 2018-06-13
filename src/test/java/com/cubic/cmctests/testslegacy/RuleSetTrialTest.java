@@ -32,14 +32,14 @@ public class RuleSetTrialTest extends RESTEngine {
 	@BeforeMethod
 	public void setUp(String browser) throws InterruptedException {
 
-		Logging.setLogConsole();
-		Logging.setLogFile();
-		Log.info("Setup Started");
-		Log.info("Current OS: " + WindowsUtils.readStringRegistryValue(Global.OS));
-		Log.info("Current Browser: " + browser);
+//		Logging.setLogConsole();
+//		Logging.setLogFile();
+//		Log.info("Setup Started");
+//		Log.info("Current OS: " + WindowsUtils.readStringRegistryValue(Global.OS));
+//		Log.info("Current Browser: " + browser);
 		driver = Utils.openBrowser(browser);
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		Log.info("Setup Completed");
+//		Log.info("Setup Completed");
 	}	
 
 	@Test(priority = 1, enabled = true)

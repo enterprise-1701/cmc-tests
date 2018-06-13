@@ -57,7 +57,7 @@ public class SearchTest extends RESTEngine {
 	}
 
 	// Dynamic Search
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1, enabled = true)
 	public void searchCustomerVerifiedTest(ITestContext context) throws Exception {
 		String testCaseName = "29961:searchCustomerVerifiedTest";
 
@@ -123,7 +123,7 @@ public class SearchTest extends RESTEngine {
 		}
 	}
 
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	public void searchCustomerNotVerifiedTest(ITestContext context) throws Exception {
 		String testCaseName = "185971:searchCustomerNotVerfiedTest";
 
@@ -153,7 +153,7 @@ public class SearchTest extends RESTEngine {
 		}
 	}
 
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3, enabled = true)
 	public void searchCustomerNoResultsTest(ITestContext context) throws Exception {
 		String testCaseName = "29963:searchCustomerNoResultsTest";
 
@@ -214,7 +214,7 @@ public class SearchTest extends RESTEngine {
 	}
 	
 	
-	@Test(priority = 5, enabled = false)
+	@Test(priority = 5, enabled = true)
 	public void searchCustomerInvalidEmail(ITestContext context) throws Exception {
 		String testCaseName = "29962:searchCustomerInvalidEmail";
 
@@ -241,7 +241,7 @@ public class SearchTest extends RESTEngine {
 		}
 	}
 
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 6, enabled = true)
 	public void searchCustomerCheckDuplicateTestFname(ITestContext context) throws Exception {
 		String testCaseName = "185972:searchCustomerCheckDuplicateTestFname";
 
@@ -266,7 +266,7 @@ public class SearchTest extends RESTEngine {
 		}
 	}
 
-	@Test(priority = 7, enabled = false)
+	@Test(priority = 7, enabled = true)
 	public void searchCustomerCheckDuplicateTestLname(ITestContext context) throws Exception {
 		String testCaseName = "185973:searchCustomerCheckDuplicateTestLname";
 
@@ -293,7 +293,7 @@ public class SearchTest extends RESTEngine {
 	
 
 	// Postal code Search
-	@Test(priority = 8, enabled = false)
+	@Test(priority = 8, enabled = true)
 	public void searchCustomerPostalCode(ITestContext context) throws Exception {
 		String testCaseName = "29965:searchCustomerPostalCode";
 
@@ -345,7 +345,7 @@ public class SearchTest extends RESTEngine {
 	}
 
 	// Postal code Search error
-	@Test(priority = 9, enabled = false)
+	@Test(priority = 9, enabled = true)
 	public void searchCustomerPostalCodeError(ITestContext context) throws Exception {
 		String testCaseName = "29966:searchCustomerPostalCodeError";
 
@@ -381,7 +381,7 @@ public class SearchTest extends RESTEngine {
 	}
 
 	// Postal code Search new search
-	@Test(priority = 10, enabled = false)
+	@Test(priority = 10, enabled = true)
 	public void searchCustomerPostalCodeNewSearch(ITestContext context) throws Exception {
 		String testCaseName = "29967:searchCustomerPostalCodeNewSearch";
 

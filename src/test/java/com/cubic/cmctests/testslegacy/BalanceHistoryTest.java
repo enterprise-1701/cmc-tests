@@ -49,13 +49,13 @@ public class BalanceHistoryTest extends RESTEngine {
 
         // Logging.setLogConsole();
         // Logging.setLogFile();
-        Log.info("Setup Started");
+//        Log.info("Setup Started");
         // Log.info("Current OS: " +
         // WindowsUtils.readStringRegistryValue(Global.OS));
-        Log.info("Current Browser: " + browser);
+//        Log.info("Current Browser: " + browser);
         driver = Utils.openBrowser(browser);
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-        Log.info("Setup Completed");
+//        Log.info("Setup Completed");
     }
 
     // STA-721 - view unregistered customer balance history dynamic
