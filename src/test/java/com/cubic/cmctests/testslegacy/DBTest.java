@@ -23,10 +23,10 @@ public class DBTest {
 
 	CoreTest coreTest = new CoreTest();
 
-	@Parameters("browser")
+	@Parameters({"browser", "executionenv"})
 	/*
 	@BeforeMethod
-	public void setUp(String browser) throws InterruptedException {
+	public void setUp(String browser, String executionenv) throws InterruptedException {
 
 		
 		Logging.setLogConsole();

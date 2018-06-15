@@ -29,17 +29,17 @@ public class GetCustomerAPITest {
 	CoreTest coreTest = new CoreTest();
 	boolean saveEmail = true;
 
-	@Parameters("browser")
+	@Parameters({"browser", "executionenv"})
 
 	@BeforeMethod
-	public void setUp(String browser) throws InterruptedException {
+	public void setUp(String browser, String executionenv) throws InterruptedException {
 
 		Logging.setLogConsole();
 		Logging.setLogFile();
 		Log.info("Setup Started");
 		Log.info("Current OS: " + WindowsUtils.readStringRegistryValue(Global.OS));
 		Log.info("Current Browser: " + browser);
-		driver = Utils.openBrowser(browser);
+		driver = Utils.openBrowser(browser, executionenv);
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		Log.info("Setup Completed");
 	}

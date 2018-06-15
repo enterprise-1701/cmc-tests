@@ -33,15 +33,15 @@ public class CreateCustomerAPITest extends RESTEngine {
 	Logger Log = Logger.getLogger(CreateCustomerAPITest.class.getName());
     RESTActions restActions;
 
-	@Parameters("browser")
+	@Parameters({"browser", "executionenv"})
 	@BeforeMethod
-	public void setUp(String browser) throws InterruptedException {
+	public void setUp(String browser, String executionenv) throws InterruptedException {
 
 		/*
 		Log = Logging.setLogConsole();
 		Logging.setLogFile();
 		*/
-		driver = Utils.openBrowser(browser);
+		driver = Utils.openBrowser(browser, executionenv);
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 //		Log.info("Setup Completed");
 	}

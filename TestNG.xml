@@ -4,7 +4,7 @@
 
 	<parameter name="seleniumgridurl" value="local"/>
 	<parameter name="browser" value="chrome"/>
-	<parameter name="executionenv" value="local"/>
+	<parameter name="executionenv" value="saucelabs"/>
 	<parameter name="version" value=""/>
 	<parameter name="platform" value=""/>
 	<parameter name="chromeDownloadDirPath" value="c:\temp\"/>
@@ -12,13 +12,13 @@
 	<parameter name="suiteID" value="549"/>
 
 	<test name="CMCTests - Chrome">
-		<parameter name="browser" value="saucelabs"/>
+		<parameter name="browser" value="chrome"/>
 		<classes>
-			<!--<class name="com.cubic.cmctests.tests.CSRLoginTest"/>-->
-			<!--<class name="com.cubic.cmctests.tests.CSRResetCustomerPasswordTest"/>-->
-			<!--<class name="com.cubic.cmctests.tests.CustomerResetPasswordTest"/>-->
-			<!--<class name="com.cubic.cmctests.tests.ViewActivityHistoryTest"/>-->
-			<!--<class name="com.cubic.cmctests.tests.ViewTravelHistoryTest"/>-->
+			<class name="com.cubic.cmctests.tests.CSRLoginTest"/>
+			<class name="com.cubic.cmctests.tests.CSRResetCustomerPasswordTest"/>
+			<class name="com.cubic.cmctests.tests.CustomerResetPasswordTest"/>
+			<class name="com.cubic.cmctests.tests.ViewActivityHistoryTest"/>
+			<class name="com.cubic.cmctests.tests.ViewTravelHistoryTest"/>
 
 			<class name="com.cubic.cmctests.testslegacy.TestScript_Driver"/>
 			<class name="com.cubic.cmctests.testslegacy.BalanceHistoryTest"/>
