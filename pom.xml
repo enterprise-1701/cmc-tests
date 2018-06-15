@@ -4,7 +4,7 @@
 
 	<groupId>com.cubic.cmctests</groupId>
 	<artifactId>CMCTests</artifactId>
-	<version>1.0.3</version>
+	<version>1.1.0</version>
 	<packaging>jar</packaging>
 
 	<name>CMCTests</name>
@@ -16,24 +16,24 @@
 		<maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
-		<testset>TestNG.xml</testset>
+		<testset>TestNG${ProjectConfigName}${CRMConfigName}${TestType}.xml</testset>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.cubic.backofficejava</groupId>
 			<artifactId>BackOfficeJava</artifactId>
-			<version>1.4.0</version>
+			<version>1.6.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.cubic.restaction</groupId>
 			<artifactId>restaction</artifactId>
-			<version>1.1</version>
+			<version>1.4.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.cubic.testutil</groupId>
 			<artifactId>testutil</artifactId>
-			<version>1.5</version>
+			<version>1.7.2</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -207,13 +207,13 @@
 		<dependency>
 			<groupId>com.cubic.soapaction</groupId>
 			<artifactId>soapaction</artifactId>
-			<version>1.1</version>
+			<version>1.4.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.cubic.seleniumaction</groupId>
 			<artifactId>seleniumaction</artifactId>
-			<version>1.1</version>
+			<version>1.4.0</version>
 		</dependency>
 
 		<dependency>
