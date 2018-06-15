@@ -14,38 +14,38 @@
 	<test name="CMCTests - Chrome">
 		<parameter name="browser" value="saucelabs"/>
 		<classes>
-			<class name="com.cubic.cmctests.tests.CSRLoginTest"/>
-			<class name="com.cubic.cmctests.tests.CSRResetCustomerPasswordTest"/>
-			<class name="com.cubic.cmctests.tests.CustomerResetPasswordTest"/>
-			<class name="com.cubic.cmctests.tests.ViewActivityHistoryTest"/>
-			<class name="com.cubic.cmctests.tests.ViewTravelHistoryTest"/>
+			<!--<class name="com.cubic.cmctests.tests.CSRLoginTest"/>-->
+			<!--<class name="com.cubic.cmctests.tests.CSRResetCustomerPasswordTest"/>-->
+			<!--<class name="com.cubic.cmctests.tests.CustomerResetPasswordTest"/>-->
+			<!--<class name="com.cubic.cmctests.tests.ViewActivityHistoryTest"/>-->
+			<!--<class name="com.cubic.cmctests.tests.ViewTravelHistoryTest"/>-->
 
-			<!--<class name="com.cubic.cmctests.testslegacy.TestScript_Driver"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.BalanceHistoryTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.CreateCustomerAPITest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.CreateCustomerDBTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.CreateCustomerTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.CreateFundingTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.CreateOrderDBTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.CreateOrderTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.CreateUnregistredCustomerTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.DeleteAddressTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.DeleteFundingTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.EmailTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.LinkAccountAPITest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.LinkAccountDBTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.LinkAccountTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.NotificationPrefTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.ResetPasswordTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.RuleSetTrialTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.SearchTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.SearchTest2"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.TokenSearchAPITest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.TokenSearchTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.TravelHistoryTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.UpdateAddressTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.UpdateContactTest"/>-->
-			<!--<class name="com.cubic.cmctests.testslegacy.UpdateFundingTest"/>-->
+			<class name="com.cubic.cmctests.testslegacy.TestScript_Driver"/>
+			<class name="com.cubic.cmctests.testslegacy.BalanceHistoryTest"/>
+			<class name="com.cubic.cmctests.testslegacy.CreateCustomerAPITest"/>
+			<class name="com.cubic.cmctests.testslegacy.CreateCustomerDBTest"/>
+			<class name="com.cubic.cmctests.testslegacy.CreateCustomerTest"/>
+			<class name="com.cubic.cmctests.testslegacy.CreateFundingTest"/>
+			<class name="com.cubic.cmctests.testslegacy.CreateOrderDBTest"/>
+			<class name="com.cubic.cmctests.testslegacy.CreateOrderTest"/>
+			<class name="com.cubic.cmctests.testslegacy.CreateUnregistredCustomerTest"/>
+			<class name="com.cubic.cmctests.testslegacy.DeleteAddressTest"/>
+			<class name="com.cubic.cmctests.testslegacy.DeleteFundingTest"/>
+			<class name="com.cubic.cmctests.testslegacy.EmailTest"/>
+			<class name="com.cubic.cmctests.testslegacy.LinkAccountAPITest"/>
+			<class name="com.cubic.cmctests.testslegacy.LinkAccountDBTest"/>
+			<class name="com.cubic.cmctests.testslegacy.LinkAccountTest"/>
+			<class name="com.cubic.cmctests.testslegacy.NotificationPrefTest"/>
+			<class name="com.cubic.cmctests.testslegacy.ResetPasswordTest"/>
+			<class name="com.cubic.cmctests.testslegacy.RuleSetTrialTest"/>
+			<class name="com.cubic.cmctests.testslegacy.SearchTest"/>
+			<class name="com.cubic.cmctests.testslegacy.SearchTest2"/>
+			<class name="com.cubic.cmctests.testslegacy.TokenSearchAPITest"/>
+			<class name="com.cubic.cmctests.testslegacy.TokenSearchTest"/>
+			<class name="com.cubic.cmctests.testslegacy.TravelHistoryTest"/>
+			<class name="com.cubic.cmctests.testslegacy.UpdateAddressTest"/>
+			<class name="com.cubic.cmctests.testslegacy.UpdateContactTest"/>
+			<class name="com.cubic.cmctests.testslegacy.UpdateFundingTest"/>
 		</classes>
 	</test>
 	<listeners>
