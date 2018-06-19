@@ -19,8 +19,6 @@
 			<class name="com.cubic.cmctests.tests.CustomerResetPasswordTest"/>
 			<class name="com.cubic.cmctests.tests.ViewActivityHistoryTest"/>
 			<class name="com.cubic.cmctests.tests.ViewTravelHistoryTest"/>
-
-			<class name="com.cubic.cmctests.testslegacy.TestScript_Driver"/>
 			<class name="com.cubic.cmctests.testslegacy.BalanceHistoryTest"/>
 			<class name="com.cubic.cmctests.testslegacy.CreateCustomerAPITest"/>
 			<class name="com.cubic.cmctests.testslegacy.CreateCustomerDBTest"/>
