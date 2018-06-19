@@ -34,18 +34,18 @@ public class LinkAccountDBTest extends RESTEngine {
 	CoreTest coreTest = new CoreTest();
 	RESTActions restActions;
 
-	@Parameters("browser")
+	@Parameters({"browser", "executionenv"})
 	@BeforeMethod
-	public void setUp(String browser) throws InterruptedException {
+	public void setUp(String browser, String executionenv) throws InterruptedException {
 
-		Logging.setLogConsole();
-		Logging.setLogFile();
-		Log.info("Setup Started");
-		Log.info("Current OS: " + WindowsUtils.readStringRegistryValue(Global.OS));
-		Log.info("Current Browser: " + browser);
-		driver = Utils.openBrowser(browser);
+//		Logging.setLogConsole();
+//		Logging.setLogFile();
+//		Log.info("Setup Started");
+//		Log.info("Current OS: " + WindowsUtils.readStringRegistryValue(Global.OS));
+//		Log.info("Current Browser: " + browser);
+		driver = Utils.openBrowser(browser, executionenv);
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		Log.info("Setup Completed");
+//		Log.info("Setup Completed");
 	}
 
 	@Test(priority = 1, enabled = true)
@@ -64,7 +64,10 @@ public class LinkAccountDBTest extends RESTEngine {
 			Log.info("cc number being used is " + validCCNumber);
 			Log.info("account id being returned is " + accountID);
 			Log.info("waiting for ABP to get updated");
-			Utils.waitTime(360000);
+			for (int i = 0; i < 6; i++) {
+				Thread.sleep(60000);
+				driver.navigate().refresh();
+			}
 			Log.info("WaitTime ended for ABP to get updated");
 
 			// create account and link it to cc
@@ -126,7 +129,10 @@ public class LinkAccountDBTest extends RESTEngine {
 			Log.info("cc number being used is " + validCCNumber);
 			Log.info("account id being returned is " + accountID);
 			Log.info("waiting for ABP to get updated");
-			Utils.waitTime(360000);
+			for (int i = 0; i < 6; i++) {
+				Thread.sleep(60000);
+				driver.navigate().refresh();
+			}
 
 			// create account and link it to cc
 			coreTest.signIn(driver);

@@ -44,18 +44,18 @@ public class CreateOrderDBTest extends RESTEngine {
 	private static final Integer PAYMENT_TYPE = 1;
 	RESTActions restActions;
 
-	@Parameters("browser")
+	@Parameters({"browser", "executionenv"})
 	@BeforeMethod
-	public void setUp(String browser) throws InterruptedException {
+	public void setUp(String browser, String executionenv) throws InterruptedException {
 
-		Logging.setLogConsole();
-		Logging.setLogFile();
-		Log.info("Setup Started");
-		Log.info("Current OS: " + WindowsUtils.readStringRegistryValue(Global.OS));
-		Log.info("Current Browser: " + browser);
-		driver = Utils.openBrowser(browser);
+//		Logging.setLogConsole();
+//		Logging.setLogFile();
+//		Log.info("Setup Started");
+//		Log.info("Current OS: " + WindowsUtils.readStringRegistryValue(Global.OS));
+//		Log.info("Current Browser: " + browser);
+		driver = Utils.openBrowser(browser, executionenv);
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		Log.info("Setup Completed");
+//		Log.info("Setup Completed");
 	}
 
 	@Test(priority = 1, enabled = true)
