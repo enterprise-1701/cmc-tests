@@ -43,19 +43,19 @@ public class BalanceHistoryTest extends RESTEngine {
     CreditCardNumberGenerator ccGenerator = new CreditCardNumberGenerator();
     String validCCNumber;
 
-    @Parameters("browser")
+    @Parameters({"browser", "executionenv"})
     @BeforeMethod
-    public void setUp(String browser) throws InterruptedException {
+    public void setUp(String browser, String executionenv) throws InterruptedException {
 
         // Logging.setLogConsole();
         // Logging.setLogFile();
-        Log.info("Setup Started");
+//        Log.info("Setup Started");
         // Log.info("Current OS: " +
         // WindowsUtils.readStringRegistryValue(Global.OS));
-        Log.info("Current Browser: " + browser);
-        driver = Utils.openBrowser(browser);
+//        Log.info("Current Browser: " + browser);
+        driver = Utils.openBrowser(browser, executionenv);
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-        Log.info("Setup Completed");
+//        Log.info("Setup Completed");
     }
 
     // STA-721 - view unregistered customer balance history dynamic
@@ -78,7 +78,10 @@ public class BalanceHistoryTest extends RESTEngine {
             Log.info("account id being returned is " + accountID);
 
             Log.info("wait time for balnce history to display on cmc");
-            Utils.waitTime(120000);
+            for (int i = 0; i < 2; i++) {
+                Thread.sleep(60000);
+                driver.navigate().refresh();
+            }
 
             coreTest.signIn(driver);
             TokenSearchPage tPage = getTokenSearchPage();
@@ -233,7 +236,10 @@ public class BalanceHistoryTest extends RESTEngine {
             Log.info("cc number being used the second time is " + validCCNumber);
             sClient.postTapSOAPCall(validCCNumber);
             Log.info("wait 1 minute for trip to get generated");
-            Utils.waitTime(120000);
+            for (int i = 0; i < 2; i++) {
+                Thread.sleep(60000);
+                driver.navigate().refresh();
+            }
             String initialBalance = (nPage3.getAccountBalances(driver).substring(1));
             Log.info("initial balance is: " + Double.valueOf(initialBalance));
 

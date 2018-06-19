@@ -19,7 +19,7 @@ public class SauceLabTest {
 	public static final String USERNAME = "cubic";
     public static final String ACCESS_KEY = "38f0a91e-f3a0-444b-ac89-d44140d1f18c";
 
-	@Parameters("browser")
+	@Parameters({"browser", "executionenv"})
 	@Test(priority = 1, enabled = true)
 	public void goToGoogle() throws Exception {
 	    

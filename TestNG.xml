@@ -2,18 +2,24 @@
 
 <suite name="CMCJava - Test Suite">
 
-   	<parameter name="seleniumgridurl" value="local"></parameter>
-   	<parameter name="browser" value="chrome"></parameter>
-    <parameter name="executionenv" value="local"></parameter>
-    <parameter name="version" value=""></parameter>
-    <parameter name="platform" value=""></parameter>
-	<parameter name="chromeDownloadDirPath" value="c:\temp\"></parameter>
-    <parameter name="projectID" value="35"></parameter>
-    <parameter name="suiteID" value="549"></parameter>
+	<parameter name="seleniumgridurl" value="local"/>
+	<parameter name="browser" value="chrome"/>
+	<parameter name="executionenv" value="saucelabs"/>
+	<parameter name="version" value=""/>
+	<parameter name="platform" value=""/>
+	<parameter name="chromeDownloadDirPath" value="c:\temp\"/>
+	<parameter name="projectID" value="35"/>
+	<parameter name="suiteID" value="549"/>
 
 	<test name="CMCTests - Chrome">
 		<parameter name="browser" value="chrome"/>
 		<classes>
+			<class name="com.cubic.cmctests.tests.CSRLoginTest"/>
+			<class name="com.cubic.cmctests.tests.CSRResetCustomerPasswordTest"/>
+			<class name="com.cubic.cmctests.tests.CustomerResetPasswordTest"/>
+			<class name="com.cubic.cmctests.tests.ViewActivityHistoryTest"/>
+			<class name="com.cubic.cmctests.tests.ViewTravelHistoryTest"/>
+
 			<class name="com.cubic.cmctests.testslegacy.TestScript_Driver"/>
 			<class name="com.cubic.cmctests.testslegacy.BalanceHistoryTest"/>
 			<class name="com.cubic.cmctests.testslegacy.CreateCustomerAPITest"/>
