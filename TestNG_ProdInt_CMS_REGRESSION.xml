@@ -8,12 +8,12 @@
 	<parameter name="version" value=""/>
 	<parameter name="platform" value=""/>
 	<parameter name="chromeDownloadDirPath" value="c:\temp\"/>
-	<parameter name="projectID" value="35"/>
-	<parameter name="suiteID" value="549"/>
 
 	<test name="CMCTests - Chrome">
 	    <parameter name="browser" value="saucelabs"/> 
+	    
 		<classes>
+		    
 			<class name="com.cubic.cmctests.tests.CSRLoginTest"/>
 			<class name="com.cubic.cmctests.tests.CSRResetCustomerPasswordTest"/>
 			<class name="com.cubic.cmctests.tests.CustomerResetPasswordTest"/>
@@ -44,10 +44,13 @@
 			<class name="com.cubic.cmctests.testslegacy.UpdateAddressTest"/>
 			<class name="com.cubic.cmctests.testslegacy.UpdateContactTest"/>
 			<class name="com.cubic.cmctests.testslegacy.UpdateFundingTest"/>
+			
 		</classes>
 	</test>
+	
 	<listeners>
 		<listener class-name="org.uncommons.reportng.HTMLReporter" />
 		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
-	</listeners>	
+	</listeners>
+	
 </suite>
