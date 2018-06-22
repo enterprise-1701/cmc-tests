@@ -4,7 +4,7 @@
 
 	<groupId>com.cubic.cmctests</groupId>
 	<artifactId>CMCTests</artifactId>
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 	<packaging>jar</packaging>
 
 	<name>CMCTests</name>
@@ -213,7 +213,7 @@
 		<dependency>
 			<groupId>com.cubic.seleniumaction</groupId>
 			<artifactId>seleniumaction</artifactId>
-			<version>1.4.0</version>
+			<version>1.5.0</version>
 		</dependency>
 
 		<dependency>
