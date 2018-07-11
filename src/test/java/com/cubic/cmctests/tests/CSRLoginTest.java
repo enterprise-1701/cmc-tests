@@ -21,7 +21,7 @@ public class CSRLoginTest extends WebDriverEngine {
 
         try {
             if (data.get(GenericConstants.RUN_MODE).equals(GenericConstants.RUN_MODE_YES)) {
-                commonLib.navigateToBaseURLAndLogin();
+                commonLib.navigateToBaseURLAndLogin(AppConstants.KEY_CLOAK_USER, AppConstants.KEY_CLOAK_PASS);
                 action.assertTrue(action.waitForVisibilityOfElement(LaunchPadPage.WelcomeHeader, "Dashboard page welcome header"), "The user has successfully logged in");
             }
         } catch (RuntimeException e) {
