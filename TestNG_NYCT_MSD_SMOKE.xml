@@ -3,7 +3,7 @@
 <parameter name="browser" value="chrome"></parameter>
    <parameter name="seleniumgridurl" value="local"></parameter>
    <parameter name="browser" value="chrome"></parameter>
-    <parameter name="executionenv" value="saucelabs"/>
+    <parameter name="executionenv" value="local"/>
      <parameter name="version" value=""></parameter>
      <parameter name="platform" value=""></parameter>
      <parameter name="chromeDownloadDirPath" value="c:\temp\"></parameter>
